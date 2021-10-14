@@ -1,0 +1,60 @@
+{
+  "user": [
+      {
+          "picture": "https://m.media-amazon.com/images/I/51mDNfrZ09L._AC_.jpg",
+          "username": "User1",
+          "password": "12345",
+          "realname": "francesco",
+          "email": "franco82@gmail.com",
+          "eta" : 18
+      },
+      {
+          "picture": "",
+          "username": "michele73",
+          "password": "12345",
+          "realname": "michele",
+          "email": "michele73@gmail.com",
+          "eta" : 32
+      },
+      {
+          "picture": "",
+          "username": "danilo73",
+          "password": "12345",
+          "realname": "danilo",
+          "email": "danilo73@gmail.com",
+          "eta" : 32
+      },
+      {
+          "picture": "",
+          "username": "salvo73",
+          "password": "12345",
+          "realname": "salvo",
+          "email": "salvo73@gmail.com",
+          "eta" : 32
+      },
+      {
+          "picture": "",
+          "username": "antonella73",
+          "password": "12345",
+          "realname": "antonella",
+          "email": "antonella73@gmail.com",
+          "eta" : 32
+      }
+  ],
+  "posts": [
+      {
+        "id": 1,
+        "title": "Welcome",
+        "text": "Hi, i'm Francesco, i'm the admin of this streaming platform, in this section we'll shared all notice of update contents, have a good day",
+        "author": "Board Administrator, Francesco",
+        "date": "09/10/2021"
+      },
+      {
+        "id": 2,
+        "title": "Enhancement",
+        "text": "Implement notice section",
+        "author": "Board Administrator, Francesco",
+        "date": "09/10/2021"
+      }
+  ]
+}
