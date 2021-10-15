@@ -5,7 +5,10 @@ import { IFilm } from 'src/app/shared/models/film.model';
   selector: 'app-subsection-category',
   template: `
 <div id="section-category">
-  <p class="text-center p-2 active-link">{{sectionTitle}}</p>
+  <div class="d-flex justify-content-between">
+    <p class="text-center p-2 active-link">{{sectionTitle}}</p>
+    <app-search-bar [titles]="titles"></app-search-bar>
+  </div>
   <div>
     <p>Visti di recente</p>
     <div>

@@ -13,7 +13,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
     </div>
 
     <div>
-     <app-user-data [user]="user"></app-user-data>
+     <app-user-data></app-user-data>
     </div>
   </div> 
   `,
@@ -41,12 +41,12 @@ export class AreaComponent implements OnInit {
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.loginService.currentUser.subscribe(data => {
+   /* this.loginService.currentUser.subscribe(data => {
       if(data){
         console.log(data)
         this.user = data;
       }
-    })
+    })*/
   }
 
 }

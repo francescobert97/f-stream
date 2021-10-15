@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'area', loadChildren: () => import('./modules/area/area.module').then(m => m.AreaModule) },
   { path: 'notizie', loadChildren: () => import('./modules/notizie/notizie.module').then(m => m.NotizieModule) },
   { path: '', loadChildren: () => import('./modules/landing/landing.module').then(m => m.LandingModule) },
+  //{ path: 'results/:searchTerm', component: ResultsComponent }
 ];
 
 @NgModule({

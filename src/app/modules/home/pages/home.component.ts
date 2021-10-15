@@ -4,11 +4,11 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
   template: `
-  <div class="d-flex justify-content-start">
+  <div>
     <app-nav-category></app-nav-category>
   </div>
 
-  <div>
+  <div class="">
     <router-outlet></router-outlet>
   </div>
   `,

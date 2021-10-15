@@ -22,11 +22,11 @@ import { Router } from '@angular/router';
     <div id="form-reg" class="text-light d-flex justify-content-center mt-4 p-4 ">
       <form class="d-flex flex-column"[formGroup]="profileForm">
         <label for="first-name"> Username: </label>
-        <input id="first-name" type="text" formControlName="username">
+        <input class="text-light" id="first-name" type="text" formControlName="username">
 
         <label for="last-name">Password: </label>
-        <input id="last-name" type="text" formControlName="password">
-        <button class="btn btn-danger mt-4" type="button" (click)="dataR()">Login</button>
+        <input class="text-light" id="last-name" type="text" formControlName="password">
+        <button class="btn text-light mt-4" type="button" (click)="dataR()">Login</button>
       </form>
     </div>
   </div>
@@ -70,7 +70,24 @@ import { Router } from '@angular/router';
         form {
           width: 70%;
           input {
+            padding: 0.2rem 0.5rem;
             border-radius: 5px;
+            background: rgba(0,0,0,0.6);
+            border: none;
+            &:focus {
+            outline: none;
+            }
+          }
+
+          button {
+            background: rgb(41,43,44);
+            box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
+            transition: 0.4s;
+            background: rgba(150, 0, 0, 0.726);
+            border: red;
+            &:hover {
+              background: rgba(150, 0, 0, 0.996)
+            }
           }
         }
       }
@@ -80,7 +97,6 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
   dataLog!:ILogin;
-  sendDataLog!: ILogin;
   public closeAnimation = true;
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
@@ -96,11 +112,7 @@ export class LandingComponent implements OnInit {
     )
 
   dataR() {
-   
-
-    this.sendDataLog = this.profileForm.value;
-    this.loginService.userAuth2(this.sendDataLog).subscribe(data => this.dataLog = data)
-
+    this.loginService.userAuth2(this.profileForm.value).subscribe(data =>  data);
 
     /*this.loginService.userAuth().subscribe(data => { 
     this.dataLog = data
@@ -108,11 +120,5 @@ export class LandingComponent implements OnInit {
 
     //this.loginService.sendUser(this.dataLog, this.sendDataLog).subscribe(data => data)
     });*/
-    
-      
-    
-     
-
-    
   }
 }

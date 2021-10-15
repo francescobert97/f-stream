@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ResultsComponent } from './components/results.component';
 import { AnimazioneComponent } from './pages/animazione.component';
 import { AzioneComponent } from './pages/azione.component';
 import { CommediaComponent } from './pages/commedia.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
       {path: 'sentimentale', component: SentimentaleComponent},
       {path: 'thriller', component: ThrillerComponent},
       {path: 'animazione', component: AnimazioneComponent},
+      {path: 'results/:searchTerm', component: ResultsComponent}
     ]},
 ];
 

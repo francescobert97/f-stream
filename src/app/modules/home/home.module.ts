@@ -15,6 +15,10 @@ import { SentimentaleComponent } from './pages/sentimentale.component';
 import { ThrillerComponent } from './pages/thriller.component';
 import { AnimazioneComponent } from './pages/animazione.component';
 import { SubsectionCategoryComponent } from './components/subsection-category.component';
+import { UikitModule } from 'src/app/shared/uikit/uikit.module';
+import { ResultsComponent } from './components/results.component';
+import { SearchBarComponent } from './components/search-bar.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -31,11 +35,15 @@ import { SubsectionCategoryComponent } from './components/subsection-category.co
     SentimentaleComponent,
     ThrillerComponent,
     AnimazioneComponent,
-    SubsectionCategoryComponent
+    SubsectionCategoryComponent,
+    ResultsComponent,
+    SearchBarComponent
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    UikitModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

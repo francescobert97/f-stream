@@ -83,10 +83,13 @@ import { IFilm } from 'src/app/shared/models/film.model';
         }
 
         #player {
+
           position: fixed;
           top: 3%;
           left: 2%;
           video {
+            -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
+          box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px -3px rgba(180,180,250,0.4);
             width: 100%;
             height: 48rem;
             border-radius: 10px;

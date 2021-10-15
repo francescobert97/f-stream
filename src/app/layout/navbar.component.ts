@@ -102,6 +102,8 @@ export class NavbarComponent implements OnInit {
         console.log(data)
         this.user = data;
         this.Router.navigateByUrl('/home/commedia')
+        localStorage.getItem('currentUser') 
+        console.log(this.user)
       }
     })
   }

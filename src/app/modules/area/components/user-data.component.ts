@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IUser } from 'src/app/shared/models/user.model';
+import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-user-data',
   template: `
-  <div class="text-light">
+  <div id="area" class="text-light">
     <p>{{user?.username}}</p>
-    <p></p>
+    <p>{{user?.email}}</p>
     <p></p>
     <p></p>
     <img>
@@ -16,11 +17,15 @@ import { IUser } from 'src/app/shared/models/user.model';
   ]
 })
 export class UserDataComponent implements OnInit {
-@Input() user!:IUser;
-  constructor() { }
+  public user!:IUser;
+
+  constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
-    //console.log(this.user)
+    this.loginService.currentUser.subscribe(data => {
+      if(data){
+        this.user = data;
+      }
+    })
   }
-
 }
