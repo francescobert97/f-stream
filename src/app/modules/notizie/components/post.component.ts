@@ -18,6 +18,7 @@ import { IPosts } from '../services/posts.service';
       min-height: 20rem;
       margin: 1rem;
       padding: 1rem;
+      border-radius: 10px;
       -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
       box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
     }

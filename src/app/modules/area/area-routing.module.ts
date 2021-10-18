@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/core/auth.guard';
 import { AreaComponent } from './pages/area.component';
 
-const routes: Routes = [{ path: '', component: AreaComponent }];
+const routes: Routes = [{ path: '', component: AreaComponent,    canActivate: [AuthGuard] }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -16,7 +16,19 @@ import { Router } from '@angular/router';
     <div class="text-style">
       <h2>Il migliore sito di streaming sul mercato</h2>
       <p>Film, Serie TV, documentari e tanto altro.</p>
-      <h3>Abbonati o accedi se sei un abbonato</h3>
+      <h3>Registrati o accedi se hai già un account</h3>
+      <button (click)="openRegistrationForm = !openRegistrationForm">Registrati</button>
+    </div>
+
+    <div *ngIf="openRegistrationForm">
+    <form class="d-flex flex-column"[formGroup]="registrationForm">
+        <label for="first-name"> Username: </label>
+        <input class="text-light" id="first-name" type="text" formControlName="username">
+
+        <label for="last-name">Password: </label>
+        <input class="text-light" id="last-name" type="text" formControlName="password">
+        <button class="btn text-light mt-4" type="button">Registrati</button>
+      </form>
     </div>
 
     <div id="form-reg" class="text-light d-flex justify-content-center mt-4 p-4 ">
@@ -98,13 +110,26 @@ import { Router } from '@angular/router';
 export class LandingComponent implements OnInit {
   dataLog!:ILogin;
   public closeAnimation = true;
+  public openRegistrationForm = false;
 
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
   ngOnInit(): void {
+    if(localStorage.currentUser) {
+      this.router.navigateByUrl('home/commedia')
+    }
+
     setTimeout(() => {
       this.closeAnimation = false
     }, 4700);
   }
+
+  registrationForm = this.fb.group({
+    username: [''],
+    password: [''],
+    }
+    )
+
+
   profileForm = this.fb.group({
     username: [''],
     password: [''],
@@ -112,13 +137,10 @@ export class LandingComponent implements OnInit {
     )
 
   dataR() {
-    this.loginService.userAuth2(this.profileForm.value).subscribe(data =>  data);
-
-    /*this.loginService.userAuth().subscribe(data => { 
-    this.dataLog = data
-    console.log(this.dataLog)
-
-    //this.loginService.sendUser(this.dataLog, this.sendDataLog).subscribe(data => data)
-    });*/
+    this.loginService.userAuth2(this.profileForm.value).subscribe(data =>  {
+      if(data) {
+        this.router.navigateByUrl('/home/commedia');
+      }
+    });
   }
 }

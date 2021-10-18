@@ -10,8 +10,8 @@ import { IUser } from 'src/app/shared/models/user.model';
   providedIn: 'root'
 })
 export class LoginService {
-  loginData!:IUser;
-
+  confirmAccessAuth:boolean = false;
+  public loginData!: IUser;
   currentUser = new BehaviorSubject<IUser>(this.loginData);
   constructor(private httpClient: HttpClient) { }
 
@@ -19,7 +19,15 @@ export class LoginService {
     return this.httpClient.get<IUser[]>('http://localhost:3000/user').pipe(
     switchMap(users => users),
     filter(users => users.username === user.username && users.password === user.password),
-    tap(user => {localStorage.setItem('currentUser', JSON.stringify(user)); this.currentUser.next(user)})
+    tap(user => {
+      localStorage.setItem('currentUser', JSON.stringify(user))
+      this.currentUser.next(user);
+    })
     )
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.currentUser.next(this.loginData);
   }
 }

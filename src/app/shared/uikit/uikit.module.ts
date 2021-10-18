@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TestComponent } from '../components/test.component';
-import { SearchBarComponent } from '../../modules/home/components/search-bar.component';
+import { NoAccessComponent } from '../components/no-access.component';
 import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [TestComponent],
+  declarations: [NoAccessComponent],
   imports: [
     CommonModule,
     FormsModule
   ],
   exports: [
-    TestComponent,
+    NoAccessComponent,
   ]
 })
 export class UikitModule { }

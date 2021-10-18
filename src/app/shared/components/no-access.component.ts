@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class TestComponent implements OnInit {
+export class NoAccessComponent implements OnInit {
 
   constructor() { }
 

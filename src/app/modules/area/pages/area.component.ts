@@ -5,15 +5,15 @@ import { LoginService } from 'src/app/shared/services/login.service';
 @Component({
   selector: 'app-area',
   template: `
-  <div  class="text-light d-flex mt-3">  
-    <div id="user-link" class="d-flex flex-column  justify-content-evenly"> 
+  <div  class="text-light d-flex justify-content-evenly mt-3">  
+    <div id="user-link" class="d-flex flex-column  justify-content-start"> 
       <a href="javascript:void(0)">Informazioni</a>
       <a href="javascript:void(0)">Gestisci Abbonamento</a>
       <a href="javascript:void(0)">Contatta il supporto</a>
     </div>
 
     <div>
-     <app-user-data></app-user-data>
+      <app-user-data></app-user-data>
     </div>
   </div> 
   `,
@@ -21,8 +21,10 @@ import { LoginService } from 'src/app/shared/services/login.service';
     `
     #user-link {
       width: 100%;
-      min-height: 20rem;
+      min-height: 80vh;
       a {
+        margin: 1rem;
+        border-radius: 10px;
         text-shadow: 0px 0px 17px rgba(255, 68, 128, 1);
         color: white;
         font-size: 1.5em;

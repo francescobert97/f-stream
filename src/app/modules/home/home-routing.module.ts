@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/core/auth.guard';
 import { ResultsComponent } from './components/results.component';
 import { AnimazioneComponent } from './pages/animazione.component';
 import { AzioneComponent } from './pages/azione.component';
@@ -25,7 +26,9 @@ const routes: Routes = [
       {path: 'thriller', component: ThrillerComponent},
       {path: 'animazione', component: AnimazioneComponent},
       {path: 'results/:searchTerm', component: ResultsComponent}
-    ]},
+    ],
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({
