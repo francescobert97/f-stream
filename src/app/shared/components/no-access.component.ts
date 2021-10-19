@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-test',
+  selector: 'app-no-access',
   template: `
     <p>
       test works!

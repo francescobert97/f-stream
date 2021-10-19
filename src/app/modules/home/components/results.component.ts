@@ -34,8 +34,6 @@ export class ResultsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private titlesStream: TitlesStreamService) { }
 
   ngOnInit(): void {
-    //this.titlesSearch = this.titlesStream.searchResults()
-    console.log(this.titlesSearch)
     this.route.params.subscribe(params => { 
       
       if(params.searchTerm) {

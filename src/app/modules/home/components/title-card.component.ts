@@ -121,8 +121,7 @@ export class TitleCardComponent implements OnInit {
   }
 
  check(title:IFilm) { title.showPlayer = false
-  console.log(title.showPlayer)
-}
- // showDetail(title:IFilm, ) {
-  //}
+    console.log(title.showPlayer)
+  }
+
 }

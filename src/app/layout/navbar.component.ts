@@ -113,7 +113,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginService.currentUser.subscribe(data => {
+      if(localStorage.currentUser) {
         this.user = JSON.parse(localStorage.currentUser)
+      }
     })
     
   }
@@ -125,10 +127,5 @@ export class NavbarComponent implements OnInit {
     })
     this.router.navigateByUrl('')
   }
-  
 
-  //log() { this.dataLogin = this.loginUserService.obtainData(this.dataLogin)
-    //console.log(this.dataLogin)}
-
-  
 }
