@@ -24,7 +24,6 @@ export class TitlesStreamService {
 
   searchResults() {
     this.titlesSearchUpdate.next(this.titlesSearch);
-    //return this.titlesSearch
    
   }
 

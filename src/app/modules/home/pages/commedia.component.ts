@@ -14,6 +14,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
 })
 export class CommediaComponent implements OnInit {
   public titles:IFilm[] = [];
+  
   constructor(private titlesStream:TitlesStreamService) { }
   
 

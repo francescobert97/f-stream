@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
     <app-nav-category></app-nav-category>
   </div>
 
-  <div class="">
+  <div>
     <router-outlet></router-outlet>
   </div>
   `,

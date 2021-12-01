@@ -15,6 +15,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
 })
 export class AnimazioneComponent implements OnInit {
   public titles:IFilm[] = [];
+  
   constructor(private titlesStream:TitlesStreamService) { }
 
   ngOnInit(): void {

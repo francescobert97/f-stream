@@ -9,7 +9,7 @@ import { LoginService } from './shared/services/login.service';
     <app-navbar></app-navbar>
   </div>
 
-  <div id="router-content"class="d-flex justify-content-center text-light">
+  <div class="d-flex justify-content-center text-light">
     <router-outlet></router-outlet>
   </div>
 
@@ -19,9 +19,7 @@ import { LoginService } from './shared/services/login.service';
   `,
   styles: [
     `
-    #router {
-      width: 100vw;
-    }
+
     `
   ]
 })

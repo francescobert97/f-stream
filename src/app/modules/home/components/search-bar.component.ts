@@ -43,7 +43,7 @@ import { TitlesStreamService } from '../../../shared/services/titles-stream.serv
 })
 export class SearchBarComponent implements OnInit {
   @Input() titles:IFilm[] = []
-  searchTerm: String = ""
+  public searchTerm: String = ""
   constructor(private route: ActivatedRoute, private router:Router, private titlesStream: TitlesStreamService) { }
 
   ngOnInit(): void {
