@@ -12,7 +12,7 @@ import { IUser } from 'src/app/shared/models/user.model';
     </div>
 
     <div class="d-flex justify-content-center">
-      <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia"  routerLinkActive="active-link">Home</a>
+      <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia/comedy"  routerLinkActive="active-link">Home</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
     </div>
@@ -117,7 +117,7 @@ export class NavbarComponent implements OnInit {
         this.user = JSON.parse(localStorage.currentUser)
       }
     })
-    
+
   }
 
   logoutUser() {

@@ -5,17 +5,17 @@ import { LoginService } from 'src/app/shared/services/login.service';
 @Component({
   selector: 'app-area',
   template: `
-  <div  class="text-light d-flex justify-content-evenly mt-3">  
-    <div id="user-link" class="d-flex flex-column  justify-content-start"> 
-      <a href="javascript:void(0)">Informazioni</a>
-      <a href="javascript:void(0)">Gestisci Abbonamento</a>
-      <a href="javascript:void(0)">Contatta il supporto</a>
+  <div  class="text-light d-flex justify-content-evenly mt-3">
+    <div id="user-link" class="d-flex flex-column justify-content-start">
+      <a href="javascript:void(0)" class="active-link">Informazioni</a>
+      <a href="javascript:void(0)" class="active-link">Gestisci Abbonamento</a>
+      <a href="javascript:void(0)" class="active-link">Contatta il supporto</a>
     </div>
 
     <div>
       <app-user-data></app-user-data>
     </div>
-  </div> 
+  </div>
   `,
   styles: [
     `
@@ -24,16 +24,13 @@ import { LoginService } from 'src/app/shared/services/login.service';
       min-height: 80vh;
       a {
         margin: 1rem;
-        border-radius: 10px;
         text-shadow: 0px 0px 17px rgba(255, 68, 128, 1);
         color: white;
         font-size: 1.5em;
         padding: 1rem;
         text-decoration: none;
-        -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-        box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
       }
-    } 
+    }
     `
   ]
 })

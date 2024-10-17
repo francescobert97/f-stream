@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IFilm } from 'src/app/shared/models/film.model';
+import { CategoriesFilmService } from '../services/categories-film.service';
 
 @Component({
   selector: 'app-subsection-category',
@@ -27,7 +29,7 @@ import { IFilm } from 'src/app/shared/models/film.model';
     <p>Nuove uscite</p>
     <div>
       <app-title-card [titles]="titles" ></app-title-card>
-    </div>  
+    </div>
   </div>
 </div>
   `,
@@ -45,11 +47,15 @@ import { IFilm } from 'src/app/shared/models/film.model';
   ]
 })
 export class SubsectionCategoryComponent implements OnInit {
-@Input() sectionTitle:string = '';
-@Input() titles:IFilm[] = [];
-  constructor() { }
+ public sectionTitle:string = '';
+ public titles:IFilm[] = [];
+  constructor(private route: ActivatedRoute, private categoriesService:CategoriesFilmService) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe(param => {
+      this.sectionTitle = param.category
+      this.titles =  this.categoriesService.getSpecificCategoryFilm(param.category)
+    })
   }
 
 }

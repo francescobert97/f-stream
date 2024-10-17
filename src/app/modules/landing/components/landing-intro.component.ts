@@ -24,8 +24,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       top: 0;
       transition: 1.5s;
       z-index: 998;
-      -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-      box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
+      -webkit-box-shadow: var(--hover-shadow-box);
+      box-shadow: var(--hover-shadow-box);
     }
 
     #video-logo {
@@ -39,8 +39,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
         width: 350px;
         z-index: 1001;
         border-radius: 50%;
-        -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-        box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
+        -webkit-box-shadow: var(--hover-shadow-box);
+        box-shadow: var(--hover-shadow-box);
       }
     }
 
@@ -52,8 +52,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       position: absolute;
       transition: 1.5s;
       z-index: 998;
-      -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-      box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
+      -webkit-box-shadow: var(--hover-shadow-box);
+      box-shadow: var(--hover-shadow-box);
     }
 
     #animation-3 {
@@ -63,8 +63,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       position: absolute;
       transition: 1.5s;
       z-index: 997;
-      -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-      box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
+      -webkit-box-shadow: var(--hover-shadow-box);
+      box-shadow: var(--hover-shadow-box);
     }
 
     #animation-4 {
@@ -74,8 +74,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       position: absolute;
       transition: 1.5s;
       z-index: 997;
-      -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-      box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
+      -webkit-box-shadow: var(--hover-shadow-box);
+      box-shadow: var(--hover-shadow-box);
     }
 
     .logo-animation {
@@ -111,6 +111,6 @@ public animation = {
     setTimeout(() => this.animation.showThirdA = false,  4000);
 
     setTimeout(() => this.animation.showFourthA = false, 4300);
-    
+
   }
 }

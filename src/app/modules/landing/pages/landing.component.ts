@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
     <app-landing-intro></app-landing-intro>
   </div>
 
-  <div id="content-landing" class="text-light d-flex align-items-center justify-content-center flex-column mt-4">
+  <div id="content-landing" class="text-light d-flex align-items-center justify-content-center flex-column mt-4 active-link">
     <div class="text-style">
       <h2>Il migliore sito di streaming sul mercato</h2>
       <p>Film, Serie TV, documentari e tanto altro.</p>
@@ -70,21 +70,18 @@ import { Router } from '@angular/router';
 
     #content-landing {
       background: url("../../../../assets/images/landing-img.jpg") center top;
-      -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-      box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
       padding: 3rem;
       width: 1000px;
       height: 40rem;
       background-size: 130%;
-      border-radius: 10px;
       button{
         border-radius: 3px;
         padding: 0.5rem 1rem;
         border: none;
         background: rgba(150, 0, 0, 0.726);
         border: red;
-        -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
-        box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(180,180,250,0.4);
+        -webkit-box-shadow: var(--hover-shadow-box);
+        box-shadow: var(--hover-shadow-box);
         &:hover {
           background: rgba(150, 0, 0, 0.996)
           }
@@ -201,5 +198,5 @@ export class LandingComponent implements OnInit {
       }
     }))
   }
-  
+
 }

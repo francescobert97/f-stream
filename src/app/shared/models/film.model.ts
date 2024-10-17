@@ -1,6 +1,6 @@
 export interface IFilm {
     urlCopertina: string,
-    titolo: string, 
+    titolo: string,
     descrizione: string,
     anno: string,
     durata: string,
