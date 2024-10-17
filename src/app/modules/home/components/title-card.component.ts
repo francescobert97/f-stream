@@ -1,4 +1,3 @@
-import { ReferenceAst } from '@angular/compiler';
 import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
 import { IFilm } from 'src/app/shared/models/film.model';
 
@@ -36,7 +35,7 @@ import { IFilm } from 'src/app/shared/models/film.model';
       overflow-x: auto;
       overflow-y: hidden;
       white-space: nowrap;
-    
+
 
       .card-film {
         position: relative;
@@ -46,7 +45,7 @@ import { IFilm } from 'src/app/shared/models/film.model';
         border-radius: 5px;
         font-size: 0;
         transition: 1s;
-        -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 25px -2px rgba(0,0,0,0.47); 
+        -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 25px -2px rgba(0,0,0,0.47);
         box-shadow: 0px 10px 13px -7px #000000, 0px 0px 25px -2px rgba(0,0,0,0.47);
         cursor: pointer;
         h3 {
@@ -88,7 +87,7 @@ import { IFilm } from 'src/app/shared/models/film.model';
           top: 3%;
           left: 2%;
           video {
-            -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4); 
+            -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px 3px rgba(150,150,250,0.4);
           box-shadow: 0px 10px 13px -7px #000000, 1px 1px 27px -3px rgba(180,180,250,0.4);
             width: 100%;
             height: 48rem;
