@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { observable } from 'rxjs';
 import { ILogin } from 'src/app/shared/models/login.model';
 import { LoginService } from 'src/app/shared/services/login.service';
@@ -158,7 +158,7 @@ export class LandingComponent implements OnInit {
   public closeAnimation = true;
   public openRegistrationForm = false;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
+  constructor(private fb: UntypedFormBuilder, private loginService: LoginService, private router: Router) { }
   ngOnInit(): void {
     if(localStorage.currentUser) {
       this.router.navigateByUrl('home/commedia')
