@@ -7,17 +7,20 @@ import { IUser } from 'src/app/shared/models/user.model';
 @Component({
   selector: 'app-navbar',
   template: `
-  <div id="navbar" class="d-flex justify-content-between align-items-center p-2">
-    <div id="logo" class="mt-2">
-    </div>
-
-    <div class="d-flex justify-content-center">
+  <div class="row p-2">
+  <div id="logo" class="col-sm-3 h-100"></div>
+      <div class="flex-column hamburger">
+        <span>___</span>
+        <span>___</span>
+        <span>___</span>
+      </div>
+    <div class="d-flex justify-content-center col-sm-7">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia/comedy"  routerLinkActive="active-link">Home</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
     </div>
 
-    <div *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2">
+    <div *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 col-sm-2">
       <div id="user-picture" class="mx-1">
        <img src="{{user?.picture}}">
       </div>
@@ -34,14 +37,16 @@ import { IUser } from 'src/app/shared/models/user.model';
       <p class="mt-2">Not Logged</p>
     </ng-template>
   </div>
+
   `,
   styles: [
     `
-    #navbar {
-      text-shadow: 0px 0px 17px rgba(255, 68, 128, 1);
+    #navbarr {
+      text-shadow: var(--text-shadow);
       background: rgb(41,43,44);
       position: relative;
       color: white;
+    }
       a {
         font-size: 1.7em;
         text-decoration: none;
@@ -54,14 +59,12 @@ import { IUser } from 'src/app/shared/models/user.model';
       }
 
       #logo {
-        width: 18rem;
-        height: 4rem;
+       /* width: 18rem;
+        height: 4rem;*/
+        max-width: 15rem;
+        min-height: 70px;
         background: url("../../assets/images/F-Stream-logo.png") center;
         background-size: 110%;
-        img {
-          width: 6rem;
-          height: 6rem;
-        }
       }
 
       #user-picture {
@@ -91,7 +94,7 @@ import { IUser } from 'src/app/shared/models/user.model';
           border-radius: 10px;
           border:none;
           background: transparent;
-          text-shadow: 0px 0px 17px rgba(255, 68, 128, 1);
+          text-shadow:var(--text-shadow);
           box-shadow: 0px 10px 13px -7px #000000, 1px 1px 100px -10px rgba(180,180,250,0.4);
           &:hover {
             background: white;
@@ -100,9 +103,20 @@ import { IUser } from 'src/app/shared/models/user.model';
         }
       }
 
-
+  .hamburger {
+    line-height:0.5;
+    zoom:150%;
+    text-shadow: var(--text-shadow);
+    display:none;
     }
-    `
+
+    @media (max-width: 600px) {
+    .hamburger {
+      display: flex;
+    }
+  }
+
+  `
   ]
 })
 export class NavbarComponent implements OnInit {

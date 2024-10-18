@@ -5,15 +5,13 @@ import { LoginService } from './shared/services/login.service';
 @Component({
   selector: 'app-root',
   template: `
-
-    <app-navbar></app-navbar>
-
-  <div class="d-flex justify-content-center text-light">
-    <router-outlet></router-outlet>
-  </div>
-
-    <app-footer></app-footer>
-
+  <div class="container-fluid">
+      <app-navbar></app-navbar>
+      <div class="text-light">
+        <router-outlet></router-outlet>
+      </div>
+        <app-footer></app-footer>
+    </div>
   `,
   styles: [
     `

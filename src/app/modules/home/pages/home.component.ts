@@ -4,13 +4,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
   template: `
-  <div>
     <app-nav-category></app-nav-category>
-  </div>
 
-  <div>
     <router-outlet></router-outlet>
-  </div>
   `,
   styles: [
   ]

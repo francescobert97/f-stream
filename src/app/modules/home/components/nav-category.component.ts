@@ -23,7 +23,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
         </div>
       </div>
       <div id="button-close-search" *ngIf="closeSearchButton.length > 0">
-        <button class="px-3 py-2 me-4 text-light active-link" (click)="cleanDataSearch()" routerLink="/home/commedia">Torna ai titoli.</button>
+        <button class="px-3 py-2 me-4 text-light active-link" (click)="cleanDataSearch()" routerLink="/home/commedia/comedy">Torna ai titoli.</button>
       </div>
   </div>
   `,

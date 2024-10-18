@@ -19,20 +19,22 @@ export class LoginService {
     return this.httpClient.post<IUser>('http://localhost:3000/user', user).pipe(
       tap(data => data)
     )
-    
+
   }
 
-  userAuth2 (user:ILogin):Observable<IUser>{ 
+  userAuth2 (user:ILogin):Observable<IUser>{
     return this.httpClient.get<IUser[]>('http://localhost:3000/user').pipe(
     switchMap(users => users),
-    filter(users => users.username === user.username && users.password === user.password),
-    tap(user => { 
-      if(user) {
+    //filter(users => users.username === user.username && users.password === user.password),
+    tap(users => {
+      localStorage.setItem('currentUser', JSON.stringify({username:user.username, password:user.password}))
+      this.currentUser.next({username:user.username, password:user.password, picture: '../../../assets/sasuke.jpeg', email: ''});
+      /*if(user) {
       localStorage.setItem('currentUser', JSON.stringify(user))
       this.currentUser.next(user);
       }else {
         console.log('dati errati')
-      }
+      }*/
     })
     )
   }

@@ -6,7 +6,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
 @Component({
   selector: 'app-results',
   template: `
-  <div id="results" class="d-flex justify-content-center align-items-center" >
+  <div id="results" class="" >
     <div *ngIf="resultsSearch.length > 0; else noResults">
       <app-title-card [titles]="resultsSearch"></app-title-card>
     </div>
@@ -17,13 +17,12 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
   <ng-template>
 >
   >
-  
+
   `,
   styles: [
     `
     #results {
-      width: 100vw;
-      height: 32rem;
+
     }
     `
   ]
@@ -34,14 +33,14 @@ export class ResultsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private titlesStream: TitlesStreamService) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => { 
-      
+    this.route.params.subscribe(params => {
+
       if(params.searchTerm) {
        this.titlesStream.searchResults()
        this.titlesStream.searchBar$.subscribe(data => this.titlesSearch = data)
        this.resultsSearch = this.titlesSearch.filter(film => film.titolo.toLowerCase().includes(params.searchTerm.toLowerCase()))
       }
-      
+
     })
   }
 
