@@ -5,7 +5,7 @@
   --text-shadow: 0px 0px 17px rgba(255, 68, 128, 1);
 }
 body {
-    position: relative;
+  overflow-x: hidden;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     background: url("assets/images/background.png") fixed top;
     background-size: 130%;

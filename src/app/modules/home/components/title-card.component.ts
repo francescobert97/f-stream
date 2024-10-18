@@ -30,18 +30,12 @@ import { IFilm } from 'src/app/shared/models/film.model';
   styles: [
     `
     #card-film-container {
-      width: 100vw;
-      height: 12.5rem;
       overflow-x: auto;
       overflow-y: hidden;
-      white-space: nowrap;
-
 
       .card-film {
         position: relative;
         margin: 0 0.8rem;
-        width: 21rem;
-        height: 12rem;
         border-radius: 5px;
         font-size: 0;
         transition: 1s;
@@ -58,8 +52,7 @@ import { IFilm } from 'src/app/shared/models/film.model';
           }
         }
         img {
-          width: 21rem;
-          height: 12rem;
+          width: clamp(300px, 355px, 380px);
           border-radius: 5px;
         }
 
@@ -106,7 +99,14 @@ import { IFilm } from 'src/app/shared/models/film.model';
         }
       }
     }
+    @media (max-width: 600px) {
+      .card-film {
+        img {
 
+        }
+      }
+
+    }
     `
   ]
 })

@@ -7,31 +7,30 @@ import { IUser } from 'src/app/shared/models/user.model';
 @Component({
   selector: 'app-navbar',
   template: `
-  <div class="row p-2">
-  <div id="logo" class="col-sm-3 h-100"></div>
-      <div class="flex-column hamburger">
-        <span>___</span>
-        <span>___</span>
-        <span>___</span>
+  <div class="row p-2 text-light ">
+  <div id="logo" class="col-sm-3 h-100 col-10"></div>
+      <div class="flex-column hamburger col-1 h-100  mx-auto" (click)="isActive = !isActive">
+        <span>____</span>
+        <span>____</span>
+        <span>____</span>
       </div>
-    <div class="d-flex justify-content-center col-sm-7">
+    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active': isActive}">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia/comedy"  routerLinkActive="active-link">Home</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
     </div>
 
-    <div *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 col-sm-2">
-      <div id="user-picture" class="mx-1">
-       <img src="{{user?.picture}}">
-      </div>
-      <p class="mx-4">{{user?.username}}</p>
+    <div id="user-tools-section" *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 col-sm-1  col-1">
+        <img src="{{user?.picture}}">
+        <p class="mx-4">{{user?.username}}</p>
+    </div>
 
-      <div class="d-flex flex-column align-items-center" id="user-menu" *ngIf="userMenu">
+    <div class="d-flex flex-column align-items-center" id="user-menu" *ngIf="userMenu">
+        <p class="mx-4 d-none">{{user?.username}}</p>
         <p>email:{{user.email}}</p>
         <a href="javascript:void(0)" routerLink="/area">Vedi le informazioni complete</a>
         <button class="" (click)="logoutUser()">Logout</button>
       </div>
-    </div>
 
     <ng-template #notlog>
       <p class="mt-2">Not Logged</p>
@@ -41,12 +40,6 @@ import { IUser } from 'src/app/shared/models/user.model';
   `,
   styles: [
     `
-    #navbarr {
-      text-shadow: var(--text-shadow);
-      background: rgb(41,43,44);
-      position: relative;
-      color: white;
-    }
       a {
         font-size: 1.7em;
         text-decoration: none;
@@ -59,25 +52,20 @@ import { IUser } from 'src/app/shared/models/user.model';
       }
 
       #logo {
-       /* width: 18rem;
-        height: 4rem;*/
         max-width: 15rem;
         min-height: 70px;
         background: url("../../assets/images/F-Stream-logo.png") center;
         background-size: 110%;
       }
 
-      #user-picture {
-        width: 4rem;
-        height: 4rem;
-        border-radius: 5px;
-        background:white;
+      #user-tools-section {
         img {
-          width: 100%;
           height: 100%;
+          width: clamp(2rem, 4rem, 6rem);
           border-radius: 10px;
         }
       }
+
 
       #user-menu {
         position: absolute;
@@ -103,16 +91,45 @@ import { IUser } from 'src/app/shared/models/user.model';
         }
       }
 
+      .navbar-links {
+        display:flex;
+        justify-content: center;
+      }
+      .active {
+        display:flex!important;
+        position:absolute;
+        top:10%;
+        left: 0;
+      }
   .hamburger {
-    line-height:0.5;
-    zoom:150%;
+    line-height:0.6;
     text-shadow: var(--text-shadow);
     display:none;
     }
 
     @media (max-width: 600px) {
+      #logo {
+        max-width: 18rem;
+        min-height: 70px;
+        background: url("../../assets/images/F-Stream-logo.png") center;
+        background-size: 110%;
+      }
+
+      #user-tools-section {
+      p:first-of-type{
+        display:none;
+      }
+      }
     .hamburger {
       display: flex;
+    }
+
+
+    .navbar-links {
+      display:none;
+      flex-direction: column;
+      z-index: 100;
+      background: red;
     }
   }
 
@@ -122,6 +139,7 @@ import { IUser } from 'src/app/shared/models/user.model';
 export class NavbarComponent implements OnInit {
   user!:IUser
   userMenu:boolean = false;
+  isActive:boolean = false;
 
   constructor(private loginService: LoginService, private router:Router) { }
 
