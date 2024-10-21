@@ -1,27 +1,39 @@
-# Stream
+### About The Project
+F-stream is your new go-to destination for streaming, offering a sleek, modern platform designed in bold red and black. With an intuitive interface and various sections to explore, F-stream makes it easy for users to discover and watch an extensive collection of movies available right on the platform.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.3.
+Whether you're in the mood for action-packed blockbusters or indie gems, F-stream has something for everyone. Users can dive into different categories, find hidden treasures, and enjoy their favorite films with a seamless viewing experience. No extra clutter—just pure entertainment at your fingertips.
 
-## Development server
+## Prerequisites
+You need to have:
+  - Installed the xx LTS version of Node
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Built With
+- [Angular](https://angular.dev/)
+- [Rxjs](https://rxjs.dev/)
+- [Bootstrap](https://getbootstrap.com/)
+  
+### Installation
 
-## Code scaffolding
+- Clone the repo
+```https://github.com/francescobert97/f-stream.git```
+- Install NPM packages
+```npm i```
+- Run the app using
+```ng serve```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+### Contributing
+Contributions are welcome!
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+If you have a suggestion that would make this better:
 
-## Running unit tests
+- [Fork the project](https://github.com/francescobert97/f-stream/fork).
+- Create a branch using git checkout -b feat-YOUR_FEATURE_NAME.
+- Work on it and commit changes using npx cz (you'll get an interactive prompt for the commit message).
+- Push to your branch using git push origin feat-YOUR_FEATURE_NAME.
+- Open a pull request.
+  
+### Contact
+Creators: Francesco Bertorotta.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Project Link: on [GitHub](https://github.com/francescobert97/f-stream).
