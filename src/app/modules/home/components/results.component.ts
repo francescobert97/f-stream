@@ -6,10 +6,14 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
 @Component({
   selector: 'app-results',
   template: `
-  <div id="results" class="" >
+  <div id="results" class="w-100 d-flex flex-column align-items-center p-5" >
     <div *ngIf="resultsSearch.length > 0; else noResults">
       <app-title-card [titles]="resultsSearch"></app-title-card>
     </div>
+
+    <app-custom-button class="" [customDataButton]="{label: 'Torna ai titoli',classes: '', link:''}" routerLink="/home/commedia/comedy"></app-custom-button>
+
+
   </div>
 
   <ng-template #noResults>

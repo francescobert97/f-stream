@@ -6,41 +6,37 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
 @Component({
   selector: 'app-nav-category',
   template: `
-  <div  class="w-100 d-flex justify-content-between align-items-center">
-      <div id="nav-category" (click)="showList = !showList" class="active-link  p-4">
-        <span >Seleziona la categoria ></span>
+  <div  class="">
+      <div id="nav-category" (click)="showList = !showList" class=" m-1 ">
 
-        <div class="category-list"  [class]="showList? 'visible-list' : 'hidden-list' ">
-          <span>Tutti i generi</span>
-          <span routerLink="/home/commedia/comedy" routerLinkActive="active-link">Commedia</span>
-          <span routerLink="/home/drammatico/dramatic" routerLinkActive="active-link">Drammatico</span>
-          <span routerLink="/home/horror/horror" routerLinkActive="active-link">Horror</span>
-          <span routerLink="/home/azione/action" routerLinkActive="active-link">Azione</span>
-          <span routerLink="/home/sentimentale/sentimental" routerLinkActive="active-link">Sentimentale</span>
-          <span routerLink="/home/thriller/thriller" routerLinkActive="active-link">Thriller</span>
-          <span routerLink="/home/animazione/animation" routerLinkActive="active-link">Animazione</span>
-          <span routerLink="/home/popolari/popular" routerLinkActive="active-link">Popolari</span>
+        <app-custom-button [customDataButton]="{label:'Seleziona la categoria >',classes: 'p-3', link:''}"></app-custom-button>
+
+        <div [ngClass]="{'gradient-bg': isSmallScreen}" class="category-list rounded p-1"  [class]="showList? 'visible-list' : 'hidden-list'">
+          <h5 class="p-3">Tutti i generi</h5>
+
+          <ng-container *ngFor="let category of categories">
+            <app-custom-button [customDataButton]="{label:category.label,classes: 'p-3 categories-btn w-100 overflow-hidden', link:category.path}"></app-custom-button>
+
+          </ng-container>
+
         </div>
       </div>
-      <div id="button-close-search" *ngIf="closeSearchButton.length > 0">
-        <button class="px-3 py-2 me-4 text-light active-link" (click)="cleanDataSearch()" routerLink="/home/commedia/comedy">Torna ai titoli.</button>
-      </div>
+
   </div>
   `,
   styles: [
     `
     #nav-category {
-      margin: 1.5rem 0.8rem;
-      text-shadow: 0px 0px 7px rgba(247, 72, 199, 1);
-      font-size: 1.2em;
       letter-spacing: 2px;
-      span  {
-        cursor: pointer;
-      }
+      padding: 1.5rem;
+
       .category-list {
-        position: absolute;
-        top: 10.7%;
-        font-size: 0.5em;
+        font-size:0.7em;
+        text-shadow: 0px 0px 7px rgba(247, 72, 199, 1);
+        position:absolute;
+        display:flex;
+        flex-direction: row;
+        align-items: center;
         span {
           padding: 0.9rem 0.3rem;
           margin: 0 0.3rem;
@@ -52,9 +48,11 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
       }
 
       .visible-list {
-        left: 18.5%;
+        top: 9.8%;
+        left: 15%;
         margin: 0 3.8rem;
-        span {
+        z-index: 9999;
+        button {
           transition: 0.25s;
           &:hover {
             border-radius: 10px;
@@ -68,8 +66,26 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
     #button-close-search {
       button {
         border: none;
-        background: transparent;
         text-shadow: 0px 0px 7px rgba(247, 72, 199, 1);
+
+      }
+    }
+
+    @media (max-width: 600px) {
+      #nav-category {
+          font-size:0.8em;
+          padding: 0.9rem;
+         .category-list {
+          font-size:0.7em;
+          display:flex;
+          flex-direction: column;
+         }
+         .visible-list {
+          top: 20.7%;
+          left: -8%;
+         }
+      }
+      span {
 
       }
     }
@@ -79,16 +95,25 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
 export class NavCategoryComponent implements OnInit {
 public showList = false;
 public showLink = false;
-public closeSearchButton:IFilm[] = [];
+isSmallScreen = false;
+
+public categories = [
+  { path: '/home/commedia/comedy', label: 'Commedia' },
+  { path: '/home/drammatico/dramatic', label: 'Drammatico' },
+  { path: '/home/horror/horror', label: 'Horror' },
+  { path: '/home/azione/action', label: 'Azione' },
+  { path: '/home/sentimentale/sentimental', label: 'Sentimentale' },
+  { path: '/home/thriller/thriller', label: 'Thriller' },
+  { path: '/home/animazione/animation', label: 'Animazione' },
+  { path: '/home/popolari/popular', label: 'Popolari' }
+];
   constructor(private titlesStream: TitlesStreamService, private route:Router) { }
 
   ngOnInit(): void {
-  this.titlesStream.searchBar$.subscribe(data => this.closeSearchButton = data)
+    window.innerWidth < 600 ? this.isSmallScreen = true : null;
   }
 
-  cleanDataSearch() {
-    this.closeSearchButton = [];
-  }
+
   navigation() {
     this.route.navigate(["/commedia", 'comedy'])
   }

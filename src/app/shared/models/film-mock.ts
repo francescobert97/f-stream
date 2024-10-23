@@ -6,7 +6,7 @@ export const FILMS:ICategory = {
         urlCopertina: '../../assets/screen-film.jpg',
         titolo: 'example1',
         descrizione: 'ex1',
-        anno: '1976',
+        anno: '2024',
         durata: '90 minuti',
         genere: 'commedia',
         eta: '14+',

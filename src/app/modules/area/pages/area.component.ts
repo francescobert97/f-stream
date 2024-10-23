@@ -6,10 +6,12 @@ import { LoginService } from 'src/app/shared/services/login.service';
   selector: 'app-area',
   template: `
   <div  class="text-light d-flex justify-content-evenly mt-3">
-    <div id="user-link" class="d-flex flex-column justify-content-start">
-      <a href="javascript:void(0)" class="active-link">Informazioni</a>
-      <a href="javascript:void(0)" class="active-link">Gestisci Abbonamento</a>
-      <a href="javascript:void(0)" class="active-link">Contatta il supporto</a>
+    <div id="user-link" class="d-flex flex-column justify-content-start gap-5">
+
+      <app-custom-button [customDataButton]="{label:'Informazioni',classes: 'p-3 categories-btn w-100 active-link', link:''}"></app-custom-button>
+      <app-custom-button [customDataButton]="{label:'Gestisci Abbonamento',classes: 'p-3 categories-btn w-100 active-link', link:''}"></app-custom-button>
+      <app-custom-button [customDataButton]="{label:'Contatta il supporto',classes: 'p-3 categories-btn w-100 active-link', link:''}"></app-custom-button>
+
     </div>
 
     <div>

@@ -14,7 +14,7 @@ import { IUser } from 'src/app/shared/models/user.model';
         <span>____</span>
         <span>____</span>
       </div>
-    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active': isActive}">
+    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active': isActive, 'gradient-bg':isSmallScreen }">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia/comedy"  routerLinkActive="active-link">Home</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
@@ -129,7 +129,6 @@ import { IUser } from 'src/app/shared/models/user.model';
       display:none;
       flex-direction: column;
       z-index: 100;
-      background: red;
     }
   }
 
@@ -140,10 +139,12 @@ export class NavbarComponent implements OnInit {
   user!:IUser
   userMenu:boolean = false;
   isActive:boolean = false;
-
+  isSmallScreen = false;
   constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit(): void {
+    window.innerWidth < 600 ? this.isSmallScreen = true : null;
+
     this.loginService.currentUser.subscribe(data => {
       if(localStorage.currentUser) {
         this.user = JSON.parse(localStorage.currentUser)
