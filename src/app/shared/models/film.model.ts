@@ -1,4 +1,5 @@
 export interface IFilm {
+    id: number,
     urlCopertina: string,
     titolo: string,
     descrizione: string,
@@ -8,5 +9,7 @@ export interface IFilm {
     eta: string,
     showDetail?: boolean,
     showPlayer?: boolean,
-    urlStream: string
+    urlStream: string,
+    numberOfStream: number,
+    lastWatch: 'never' | string
 }

@@ -50,15 +50,15 @@ import { TitlesStreamService } from '../../../shared/services/titles-stream.serv
 export class SearchBarComponent implements OnInit {
   @Input() titles:IFilm[] = []
   public searchTerm: String = ""
-  constructor(private route: ActivatedRoute, private router:Router, private titlesStream: TitlesStreamService) { }
+  constructor(private router:Router, private titlesStream: TitlesStreamService) { }
 
   ngOnInit(): void {
   }
 
   search():void{
     if(this.searchTerm) {
-    this.titlesStream.getSearchBar(this.titles)
-    this.router.navigateByUrl('home/results/'+ this.searchTerm );
+    this.titlesStream.getSearchBar(this.searchTerm as string);
+    this.router.navigateByUrl('home/results/'+ this.searchTerm);
     }
   }
 }

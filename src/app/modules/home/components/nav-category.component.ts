@@ -107,7 +107,7 @@ public categories = [
   { path: '/home/animazione/animation', label: 'Animazione' },
   { path: '/home/popolari/popular', label: 'Popolari' }
 ];
-  constructor(private titlesStream: TitlesStreamService, private route:Router) { }
+  constructor( private route:Router) { }
 
   ngOnInit(): void {
     window.innerWidth < 600 ? this.isSmallScreen = true : null;

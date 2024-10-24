@@ -14,9 +14,10 @@ import { CategoriesFilmService } from '../services/categories-film.service';
 
   <ng-container *ngFor="let subCategory of subCategories">
     <p>{{subCategory.label}}</p>
-    <div>
-      <app-title-card [titles]="subCategory.films" ></app-title-card>
-    </div>
+    <ng-container *ngFor="let film of subCategory.films">
+      <app-title-card [title]="film" ></app-title-card>
+    </ng-container>
+
   </ng-container>
 
 
@@ -68,16 +69,48 @@ export class SubsectionCategoryComponent implements OnInit {
     this.route.params.subscribe(param => {
       this.sectionTitle = param.category
        this.titles = this.categoriesService.getSpecificCategoryFilm(param.category)
-      this.subCategories[0].films = this.categoriesService.getSpecificCategoryFilm(param.category)
-      this.subCategories[1].films = this.categoriesService.getSpecificCategoryFilm(param.category)
-
     })
-    this.filterFilms(this.titles);
+    this.filterFilms('mostWatched');
+    this.filterFilms('newEntry');
+    this.filterFilms('recentlySeen');
     console.log(this.subCategories)
 
   }
 
-  filterFilms (categoryFilms?:IFilm[]){
+  filterFilms ( filterType:string){
+    console.log('in esecuzione')
+    switch(filterType) {
+      case 'mostWatched':
+        this.subCategories[1].films = this.titles.filter(title => title.numberOfStream >= 3000)
+      break;
+      case 'newEntry':
+        const currentYear = new Date().getFullYear()
+        this.subCategories[2].films = this.titles.filter(title => Number(title.anno) === currentYear);
+      break;
+      case 'recentlySeen':
+
+        this.subCategories[0].films = this.titles.filter(title => {
+
+          //if(title.lastWatch === 'never') return false;
+          if(title.id >= 500000) {
+              const rndmDate = new Date()
+              const dasottrarre =  Math.floor(Math.random() * 7);
+               rndmDate.setDate(rndmDate.getDate() - dasottrarre)
+              const dateoftoday = `${rndmDate.getFullYear()}/${rndmDate.getMonth() + 1}/${rndmDate.getDay()}`
+              console.log(dateoftoday)
+
+              title.lastWatch = dateoftoday
+          }
+          const dateOfOneWeekAgo = new Date()
+          dateOfOneWeekAgo.setDate(new Date().getDate() -7)
+          console.log(dateOfOneWeekAgo)
+         const lastWatch = new Date(title.lastWatch);
+         console.log(lastWatch)
+          //terminare di convertire stringa lastwatch in data per il confronto
+          return title.lastWatch
+        } )
+      break;
+    }
     const currentYear = new Date().getFullYear()
     this.subCategories[2].films = this.titles.filter(title => Number(title.anno) === currentYear);
   }

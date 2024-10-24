@@ -1,14 +1,15 @@
 import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
 import { IFilm } from 'src/app/shared/models/film.model';
+import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
 
 @Component({
   selector: 'app-title-card',
   template: `
   <div id="card-film-container" class="d-flex">
-    <div  (mouseover)="title.showDetail = true" class="card-film text-light bg-light" *ngFor="let title of titles">
+    <div  (mouseover)="title.showDetail = true" class="card-film text-light bg-light">
      <img src="{{title.urlCopertina}}">
 
-      <div (click)="title.showPlayer = !title.showPlayer" (mouseout)="title.showDetail = false" *ngIf="title.showDetail" class="absolute-information d-flex flex-column align-items-center">
+      <div (click)="openPlayer()" (mouseout)="title.showDetail = false" *ngIf="title.showDetail" class="absolute-information d-flex flex-column align-items-center">
         <h3>{{title.titolo}}</h3>
         <p>{{title.descrizione}}</p>
         <div>
@@ -111,16 +112,24 @@ import { IFilm } from 'src/app/shared/models/film.model';
   ]
 })
 export class TitleCardComponent implements OnInit {
-  @Input() titles:IFilm[] = [];
+  @Input() title!:IFilm;
   public showDet:boolean = false;
 
-  constructor() { }
+  constructor(private titlesStream: TitlesStreamService) { }
 
   ngOnInit(): void {
   }
 
  check(title:IFilm) { title.showPlayer = false
     console.log(title.showPlayer)
+  }
+
+  openPlayer () {
+    this.title.showPlayer = !this.title.showPlayer
+    const date = new Date()
+
+    this.title.lastWatch = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay() < 10? '0'+ date.getDay() : date.getDay()}`
+    this.titlesStream.updateFilm(this.title)
   }
 
 }
