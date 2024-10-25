@@ -7,14 +7,13 @@ import { IUser } from 'src/app/shared/models/user.model';
 @Component({
   selector: 'app-navbar',
   template: `
-  <div class="row p-2 text-light ">
-  <div id="logo" class="col-sm-3 h-100 col-10"></div>
-      <div class="flex-column hamburger col-1 h-100  mx-auto" (click)="isActive = !isActive">
-        <span>____</span>
-        <span>____</span>
-        <span>____</span>
-      </div>
-    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active': isActive, 'gradient-bg':isSmallScreen }">
+  <div class="row p-2 text-light">
+    <div id="logo" class="col-sm-3 h-100 col-10"></div>
+    <div class="col-1">
+    <app-hamburger (openElement)="showMenu()"></app-hamburger>
+    </div>
+
+    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active bg-gradient':isActive} ">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia/comedy"  routerLinkActive="active-link">Home</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
@@ -101,11 +100,7 @@ import { IUser } from 'src/app/shared/models/user.model';
         top:10%;
         left: 0;
       }
-  .hamburger {
-    line-height:0.6;
-    text-shadow: var(--text-shadow);
-    display:none;
-    }
+
 
     @media (max-width: 600px) {
       #logo {
@@ -120,9 +115,6 @@ import { IUser } from 'src/app/shared/models/user.model';
         display:none;
       }
       }
-    .hamburger {
-      display: flex;
-    }
 
 
     .navbar-links {
@@ -139,11 +131,9 @@ export class NavbarComponent implements OnInit {
   user!:IUser
   userMenu:boolean = false;
   isActive:boolean = false;
-  isSmallScreen = false;
   constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit(): void {
-    window.innerWidth < 600 ? this.isSmallScreen = true : null;
 
     this.loginService.currentUser.subscribe(data => {
       if(localStorage.currentUser) {
@@ -151,6 +141,10 @@ export class NavbarComponent implements OnInit {
       }
     })
 
+  }
+  showMenu() {
+    this.isActive = !this.isActive;
+    console.log(this.isActive)
   }
 
   logoutUser() {

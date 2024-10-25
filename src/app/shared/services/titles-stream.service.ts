@@ -19,6 +19,7 @@ export class TitlesStreamService {
 
   getSearchBar(filmtoLookUp:string) {
     const results =  this.Films.filter(film => film.titolo.toLowerCase().includes(filmtoLookUp));
+    console.log(results)
     this.titlesSearchUpdate.next(results);
   }
   updateFilm(filmToUpdate:IFilm) {

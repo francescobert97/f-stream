@@ -23,5 +23,13 @@ body {
     .bg-none {
       background: transparent;
     }
+
+    .z-index-moreover {
+      z-index: 9999;
+    }
+
+    .z-index-strong {
+      z-index: 1000;
+    }
 }
 

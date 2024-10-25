@@ -1,19 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-export interface ICustomDataButton {
+export interface ICustomDataButton<T = unknown> {
   label: string,
   classes?: string,
-  link: string
+  link?: string,
+  method?: {fn:(...params:T[]) => T,
+    params:any;
+  }
 }
 
 @Component({
   selector: 'app-custom-button',
   template: `
 
-      <button *ngIf="customDataButton.link.length > 0 else NoLink" [class]="customDataButton.classes"  class="custom-button btn bg-none  text-light active-link " routerLink="{{customDataButton.link}}" routerLinkActive="active-link">{{customDataButton.label}}</button>
+      <button *ngIf="customDataButton.link && customDataButton.link.length > 0 else NoLink" [class]="customDataButton.classes"  class="custom-button btn   text-light active-link " routerLink="{{customDataButton.link}}" routerLinkActive="active-link">{{customDataButton.label}}</button>
 
     <ng-template #NoLink>
-      <button  [class]="customDataButton.classes" class="custom-button btn bg-none  text-light active-link " >{{customDataButton.label}}</button>
+      <button (click)="triggerFunction()" [class]="customDataButton.classes" class="custom-button btn   text-light active-link " >{{customDataButton.label}}</button>
 
     </ng-template>
 
@@ -28,18 +31,30 @@ export interface ICustomDataButton {
       letter-spacing:2px;
       font-size:1.5em;
     }
+    .subsection-category-scroll-left {
+      left:15px;
+      top:35%;
+
+    }
+
+    .subsection-category-scroll-right {
+      right: 15px;
+      top:35%;
+    }
   `]
 })
 export class CustomButtonComponent implements OnInit {
 @Input() customDataButton:ICustomDataButton = {
   label: 'close',
   classes: '',
-  link:''
+  link:'',
 }
+@Output() callFnFromOutside = new EventEmitter<unknown>();
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.customDataButton)
   }
-
+  triggerFunction () {
+    this.callFnFromOutside.emit(null);
+  }
 }

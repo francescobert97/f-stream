@@ -8,7 +8,9 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
   template: `
   <div id="results" class="w-100 d-flex flex-column align-items-center p-5" >
     <div *ngIf="titlesSearch.length > 0; else noResults">
-      <app-title-card [title]="titlesSearch[0]"></app-title-card>
+      <ng-container *ngFor="let title of titlesSearch">
+        <app-title-card [title]="title"></app-title-card>
+      </ng-container>
     </div>
 
     <app-custom-button [customDataButton]="{label: 'Torna ai titoli',classes: '', link:''}" routerLink="/home/commedia/comedy"></app-custom-button>

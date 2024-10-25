@@ -4,13 +4,13 @@ const rndmNumber = (nmb:number, minValue:number=0) => Math.floor(Math.max(minVal
 
 const generateCategoryFilms = (genre:string) => {
   const filmsArr = new Array(20).fill('');
-  return filmsArr.map(() => {
+  return filmsArr.map((film,index) => {
     const generatedFilm:IFilm = {
       id: rndmNumber(1000000),
       urlCopertina: '../../assets/screen-film.jpg',
       titolo: `example-${rndmNumber(10,1)}`,
       descrizione: 'lorem ipsum',
-      anno: `${2024 - rndmNumber(150) }`,
+      anno: index < 4? '2024' : `${2024 - rndmNumber(150) }`,
       durata: `${rndmNumber(240, 40)} minuti`,
       genere: genre,
       eta: `+${rndmNumber(18,3)}`,
