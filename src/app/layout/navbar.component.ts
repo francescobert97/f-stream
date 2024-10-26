@@ -8,18 +8,18 @@ import { IUser } from 'src/app/shared/models/user.model';
   selector: 'app-navbar',
   template: `
   <div class="row p-2 text-light">
-    <div id="logo" class="col-sm-3 h-100 col-10"></div>
+    <div id="logo" class="col-sm-3 h-100 col-8"></div>
     <div class="col-1">
-    <app-hamburger (openElement)="showMenu()"></app-hamburger>
+      <app-hamburger (openElement)="showMenu()"></app-hamburger>
     </div>
 
-    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active bg-gradient':isActive} ">
+    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active gradient-bg':isActive} ">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia/comedy"  routerLinkActive="active-link">Home</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
     </div>
 
-    <div id="user-tools-section" *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 col-sm-1  col-1">
+    <div id="user-tools-section" *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 col-sm-1  col-1 offset-1">
         <img src="{{user?.picture}}">
         <p class="mx-4">{{user?.username}}</p>
     </div>
@@ -111,6 +111,9 @@ import { IUser } from 'src/app/shared/models/user.model';
       }
 
       #user-tools-section {
+        img {
+          zoom: 70%;
+        }
       p:first-of-type{
         display:none;
       }

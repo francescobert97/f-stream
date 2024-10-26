@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PlayerContainerComponent } from './player-container.component';
+import { PlayerContainerComponent } from './pages/player-container.component';
 
 const routes: Routes = [
   {
     path: '',
    component: PlayerContainerComponent ,
     children: [
-      {path: '/::film', component: PlayerContainerComponent },
+      {path: ':film', component: PlayerContainerComponent },
     ]
     },
 ];
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule { }
+export class PlayerRoutingModule { }
