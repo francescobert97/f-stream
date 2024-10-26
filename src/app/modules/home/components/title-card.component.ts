@@ -1,30 +1,25 @@
 import { Router, ParamMap } from '@angular/router';
 import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
-import { IFilm } from 'src/app/shared/models/film.model';
+import { IFilm, MOVIE_FALLBACK } from 'src/app/shared/models/film.model';
 import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
+import { saveTolocalStorage } from 'src/app/shared/utils/localstorage';
 
 @Component({
   selector: 'app-title-card',
   template: `
   <div id="card-film-container" class="d-flex">
-    <div  (mouseover)="title.showDetail = true" class="card-film text-light bg-light">
-     <img src="{{title.urlCopertina}}">
+    <div (mouseover)="showDet = true" class="card-film text-light bg-light">
+     <img src="{{movie.urlCopertina}}">
 
-      <div (click)="openPlayer(title)" (mouseout)="title.showDetail = false" *ngIf="title.showDetail" class="absolute-information d-flex flex-column align-items-center">
-        <h3>{{title.titolo}}</h3>
-        <p>{{title.descrizione}}</p>
+      <div (click)="openPlayer()" (mouseout)="showDet = false" *ngIf="showDet" class="absolute-information d-flex flex-column align-items-center">
+        <h3>{{movie.titolo}}</h3>
+        <p>{{movie.descrizione}}</p>
         <div>
-          <span class="mx-2">Uscita: {{title.anno}}</span>
-          <span class="mx-2">Durata: {{title.durata}}</span>
+          <span class="mx-2">Uscita: {{movie.anno}}</span>
+          <span class="mx-2">Durata: {{movie.durata}}</span>
         </div>
       </div>
-      <div id="shadow-screen" *ngIf="title.showPlayer">
-        <div id="player">
-          <div id="close-video" (click)="title.showPlayer = !title.showPlayer">Chiudi</div>
-            <video controls src="{{title.urlStream}}"></video>
-          </div>
-        </div>
-      </div>
+
   </div>
 
 
@@ -80,7 +75,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
   ]
 })
 export class TitleCardComponent implements OnInit {
-  @Input() title!:IFilm;
+  @Input() movie:IFilm = MOVIE_FALLBACK;
   public showDet:boolean = false;
 
   constructor(private router:Router,private titlesStream: TitlesStreamService) { }
@@ -88,18 +83,19 @@ export class TitleCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
- check(title:IFilm) { title.showPlayer = false
-    console.log(title.showPlayer)
-  }
 
-  openPlayer (title:IFilm) {
-    const {id, urlStream } = title
-    //this.title.showPlayer = !this.title.showPlayer
-    this.router.navigate([`/player/${id}`], {queryParams:{ url:urlStream}})
-    const date = new Date()
 
-    this.title.lastWatch = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay() < 10? '0'+ date.getDay() : date.getDay()}`
-    this.titlesStream.updateFilm(this.title)
+public  openPlayer () {
+    const {id, genere } = this.movie
+    const date = new Date();
+
+    this.movie.lastWatch = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay() < 10? '0'+ date.getDay() : date.getDay()}`;
+    this.titlesStream.updateFilm(this.movie);
+
+    const currentMovie = this.titlesStream.getFilm({id, genere})
+    saveTolocalStorage('currentMovieWatched', currentMovie)
+    this.router.navigate([`/player`], {queryParams:{id, genere}})
+
   }
 
 }

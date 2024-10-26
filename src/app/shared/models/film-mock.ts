@@ -1,8 +1,9 @@
+import { FilmCategories } from "src/app/modules/home/services/categories-film.service";
 import { ICategory } from "./category.model";
 import { IFilm } from "./film.model";
 const rndmNumber = (nmb:number, minValue:number=0) => Math.floor(Math.max(minValue, Math.random() * nmb));
 
-const generateCategoryFilms = (genre:string) => {
+const generateCategoryFilms = (genre:FilmCategories) => {
   const filmsArr = new Array(20).fill('');
   return filmsArr.map((film,index) => {
     const generatedFilm:IFilm = {
@@ -16,18 +17,19 @@ const generateCategoryFilms = (genre:string) => {
       eta: `+${rndmNumber(18,3)}`,
       urlStream: '../../assets/screen-video.mp4',
       numberOfStream: rndmNumber(10000 ),
-      lastWatch: 'never'
+      lastWatch: 'never',
+      likes: 0
   }
     return generatedFilm
   })
 }
 export const FILMS:ICategory = {
-  comedy: generateCategoryFilms('commedia'),
-  action:generateCategoryFilms('azione'),
-  animation: generateCategoryFilms('animazione'),
-  dramatic: generateCategoryFilms('drammatico'),
+  comedy: generateCategoryFilms('comedy'),
+  action:generateCategoryFilms('action'),
+  animation: generateCategoryFilms('animation'),
+  dramatic: generateCategoryFilms('dramatic'),
   horror: generateCategoryFilms('horror'),
-  popular:generateCategoryFilms('popolari'),
-  sentimental:generateCategoryFilms('sentimentali'),
+  popular:generateCategoryFilms('popular'),
+  sentimental:generateCategoryFilms('sentimental'),
   thriller:  generateCategoryFilms('thriller')
 }

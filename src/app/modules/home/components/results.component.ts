@@ -39,7 +39,6 @@ export class ResultsComponent implements OnInit {
 
   ngOnInit(): void {
        this.titlesStream.searchBar$.subscribe(data =>this.titlesSearch = data)
-       console.log(this.titlesSearch)
   }
 
 }

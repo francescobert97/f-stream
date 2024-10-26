@@ -13,7 +13,7 @@ export type FilmCategories = 'comedy' | 'action' | 'animation' | 'dramatic' | 'h
 export class CategoriesFilmService {
   public films:ICategory = FILMS;
 
-  constructor(private titlesStream:TitlesStreamService) { }
+  constructor() { }
 
   public getSpecificCategoryFilm(category:FilmCategories):IFilm[] {
     return this.films[category]

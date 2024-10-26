@@ -14,7 +14,7 @@ import { IUser } from 'src/app/shared/models/user.model';
     </div>
 
     <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active gradient-bg':isActive} ">
-      <a class="mx-3" href="javascript:void(0)" routerLink="/home/commedia/comedy"  routerLinkActive="active-link">Home</a>
+      <a class="mx-3" href="javascript:void(0)" routerLink="/home/comedy"  routerLinkActive="active-link">Home</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
     </div>
@@ -28,7 +28,7 @@ import { IUser } from 'src/app/shared/models/user.model';
         <p class="mx-4 d-none">{{user?.username}}</p>
         <p>email:{{user.email}}</p>
         <a href="javascript:void(0)" routerLink="/area">Vedi le informazioni complete</a>
-        <button class="" (click)="logoutUser()">Logout</button>
+        <app-custom-button (callFnFromOutside)="logoutUser()" [customDataButton]="{label: 'Logout',classes: '',link:'/'}"></app-custom-button>
       </div>
 
     <ng-template #notlog>
@@ -73,20 +73,6 @@ import { IUser } from 'src/app/shared/models/user.model';
         a {
           font-size: 0.7em;
           text-decoration: underline
-        }
-        button {
-          width: 5rem;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 10px;
-          border:none;
-          background: transparent;
-          text-shadow:var(--text-shadow);
-          box-shadow: 0px 10px 13px -7px #000000, 1px 1px 100px -10px rgba(180,180,250,0.4);
-          &:hover {
-            background: white;
-            color: black;
-          }
         }
       }
 
@@ -155,7 +141,7 @@ export class NavbarComponent implements OnInit {
     this.loginService.currentUser.subscribe(data => {
       this.user = data;
     })
-    this.router.navigateByUrl('')
+    //this.router.navigateByUrl('')
   }
 
 }

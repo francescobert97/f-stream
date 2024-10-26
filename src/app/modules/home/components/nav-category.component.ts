@@ -98,14 +98,14 @@ public showLink = false;
 isSmallScreen = false;
 
 public categories = [
-  { path: '/home/commedia/comedy', label: 'Commedia' },
-  { path: '/home/drammatico/dramatic', label: 'Drammatico' },
-  { path: '/home/horror/horror', label: 'Horror' },
-  { path: '/home/azione/action', label: 'Azione' },
-  { path: '/home/sentimentale/sentimental', label: 'Sentimentale' },
-  { path: '/home/thriller/thriller', label: 'Thriller' },
-  { path: '/home/animazione/animation', label: 'Animazione' },
-  { path: '/home/popolari/popular', label: 'Popolari' }
+  { path: '/home/comedy', label: 'Commedia' },
+  { path: '/home/dramatic', label: 'Drammatico' },
+  { path: '/home/horror', label: 'Horror' },
+  { path: '/home/action', label: 'Azione' },
+  { path: '/home/sentimental', label: 'Sentimentale' },
+  { path: '/home/thriller', label: 'Thriller' },
+  { path: '/home/animation', label: 'Animazione' },
+  { path: '/home/popular', label: 'Popolari' }
 ];
   constructor( private route:Router) { }
 

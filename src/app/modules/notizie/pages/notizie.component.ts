@@ -14,11 +14,11 @@ import { IPosts, PostsService } from '../services/posts.service';
   ]
 })
 export class NotizieComponent implements OnInit {
-  public posts:IPosts[] = [];
+  public posts:any[] = [];
   constructor(private postsService: PostsService) { }
 
   ngOnInit(): void {
     this.postsService.getPosts().subscribe(data => this.posts = data)
-  }
+    this.postsService.getPosts().subscribe(console.log)  }
 
 }

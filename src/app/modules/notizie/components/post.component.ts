@@ -5,10 +5,11 @@ import { IPosts } from '../services/posts.service';
   selector: 'app-post',
   template: `
   <div id="post-card" class="d-flex flex-column justify-content-between active-link" *ngFor="let post of posts">
-    <h2 class="">{{post.title}}</h2>
-    <p class="align-self-start">{{post.text}}</p>
+  <h2 class="">{{post.tile}}</h2>
+    <p class="align-self-start">{{post.body}}</p>
     <div>
-      <span>{{post.author}}</span> <span>{{post.date}}</span>
+      <span>{{post.author}}</span>,
+      <span>{{post.date | date}}</span>
     </div>
   </div>
   `,
@@ -23,7 +24,7 @@ import { IPosts } from '../services/posts.service';
   ]
 })
 export class PostComponent implements OnInit {
-  @Input() posts:IPosts[] = []
+  @Input() posts:any[] = []
   constructor() { }
 
   ngOnInit(): void {

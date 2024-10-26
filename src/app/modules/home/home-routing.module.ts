@@ -10,14 +10,14 @@ const routes: Routes = [
     path: '',
    component: HomeComponent,
     children: [
-      {path: 'commedia/:category', component: SubsectionCategoryComponent},
-      {path: 'drammatico/:category', component: SubsectionCategoryComponent},
-      {path: 'azione/:category', component: SubsectionCategoryComponent},
-      {path: 'horror/:category', component: SubsectionCategoryComponent},
-      {path: 'popolari/:category', component: SubsectionCategoryComponent},
-      {path: 'sentimentale/:category', component: SubsectionCategoryComponent},
-      {path: 'thriller/:category', component: SubsectionCategoryComponent},
-      {path: 'animazione/:category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
+      {path: ':category', component: SubsectionCategoryComponent},
       {path: 'results/:searchTerm', component: ResultsComponent}
     ],
     canActivate: [AuthGuard]

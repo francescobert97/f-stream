@@ -24,7 +24,7 @@ import { CategoriesFilmService } from '../services/categories-film.service';
 
         <div #containerToScroll  class="d-flex title-container">
             <ng-container *ngFor="let film of subCategory.films">
-            <app-title-card [title]="film" ></app-title-card>
+            <app-title-card [movie]="film" ></app-title-card>
           </ng-container>
         </div>
     </div>

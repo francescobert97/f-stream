@@ -1,7 +1,8 @@
+import { CategoriesFilmService } from './../../modules/home/services/categories-film.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { FILMS } from 'src/app/shared/models/film-mock';
-import { IFilm } from 'src/app/shared/models/film.model';
+import { IFilm, MOVIE_FALLBACK } from 'src/app/shared/models/film.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,7 +12,7 @@ export class TitlesStreamService {
   public filmObs$ = this.observableFilm.asObservable();
   private titlesSearchUpdate =  new BehaviorSubject<IFilm[]>(this.Films);
   searchBar$ = this.titlesSearchUpdate.asObservable();
-  constructor() { }
+  constructor(private categoriesService:CategoriesFilmService) { }
 
   getAll() {
     return this.filmObs$;
@@ -25,5 +26,11 @@ export class TitlesStreamService {
     this.Films.map(film => {
       film.id === filmToUpdate.id ? filmToUpdate : film
     })
+  }
+
+  getFilm<T extends Pick<IFilm, 'id' | 'genere'>>(movie:T):IFilm {
+      this.categoriesService.getSpecificCategoryFilm(movie.genere);
+      const foundMovie = this.Films.find(movie => movie.id === movie.id);
+     return foundMovie? foundMovie : MOVIE_FALLBACK;
   }
 }
