@@ -158,7 +158,7 @@ export class LandingComponent implements OnInit {
   constructor(private fb: UntypedFormBuilder, private loginService: LoginService, private router: Router) { }
   ngOnInit(): void {
     if(localStorage.currentUser) {
-      this.router.navigateByUrl('home/commedia')
+      this.router.navigateByUrl('home/comedy')
     }
 
     setTimeout(() => {
