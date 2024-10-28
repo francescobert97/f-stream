@@ -5,6 +5,7 @@ import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './pages/landing.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LandingIntroComponent } from './components/landing-intro.component';
+import { UikitModule } from 'src/app/shared/uikit/uikit.module';
 
 
 
@@ -17,6 +18,7 @@ import { LandingIntroComponent } from './components/landing-intro.component';
     CommonModule,
     LandingRoutingModule,
     ReactiveFormsModule,
+    UikitModule
   ]
 })
 export class LandingModule { }

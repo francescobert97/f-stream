@@ -51,7 +51,9 @@ import { Router } from '@angular/router';
 
         <label for="last-name">Password: </label>
         <input class="text-light" id="last-name" type="text" formControlName="password">
-        <button class="btn text-light mt-4" type="button" (click)="dataR()">Login</button>
+        <button class="btn text-light mt-4" type="button" (click)="dataR('user')">Login</button>
+        <app-custom-button (callFnFromOutside)="dataR('guest')" [customDataButton]="{label:'Login as a guest', classes:'', link:''}"></app-custom-button>
+
       </form>
     </div>
   </div>
@@ -182,19 +184,15 @@ export class LandingComponent implements OnInit {
     }
     )
 
-  dataR() {
-    this.loginService.userAuth2(this.profileForm.value).subscribe(data =>  {
-      if(data) {
-        this.router.navigateByUrl('/home/commedia');
-      }
-    });
+  dataR(mode:string) {
+    this.loginService.userAuth2(mode === 'user'?this.profileForm.value : {}).subscribe(data => {if(data) this.router.navigateByUrl('/home/comedy')})
   }
 
   userRegistration() {
     this.loginService.newUser({id: Math.random().toString(36).substr(2, 9), picture: '../../../../assets/icon/avatar.png',...this.registrationForm.value})
     .subscribe(data => this.loginService.userAuth2(data).subscribe(data => {
       if(data) {
-        this.router.navigateByUrl('/home/commedia')
+        this.router.navigateByUrl('/home/commedy')
       }
     }))
   }

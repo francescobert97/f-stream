@@ -6,10 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { CustomButtonComponent } from '../components/custom-button.component';
 import { RouterModule } from '@angular/router';
 import { HamburgerComponent } from '../components/hamburger.component';
+import { TooltipComponent } from '../components/tooltip.component';
 
 
 @NgModule({
-  declarations: [NoAccessComponent, CustomButtonComponent, HamburgerComponent,ResizeDirective],
+  declarations: [NoAccessComponent, CustomButtonComponent, HamburgerComponent,TooltipComponent,ResizeDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,6 +20,7 @@ import { HamburgerComponent } from '../components/hamburger.component';
     NoAccessComponent,
     CustomButtonComponent,
     HamburgerComponent,
+    TooltipComponent,
     ResizeDirective
   ]
 })

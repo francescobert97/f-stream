@@ -5,49 +5,41 @@ import { LoginService } from 'src/app/shared/services/login.service';
 @Component({
   selector: 'app-area',
   template: `
-  <div  class="text-light d-flex justify-content-evenly mt-3">
-    <div id="user-link" class="d-flex flex-column justify-content-start gap-5">
-
-      <app-custom-button [customDataButton]="{label:'Informazioni',classes: 'p-3 categories-btn w-100 active-link', link:''}"></app-custom-button>
-      <app-custom-button [customDataButton]="{label:'Gestisci Abbonamento',classes: 'p-3 categories-btn w-100 active-link', link:''}"></app-custom-button>
-      <app-custom-button [customDataButton]="{label:'Contatta il supporto',classes: 'p-3 categories-btn w-100 active-link', link:''}"></app-custom-button>
-
+  <div  class="area mt-3">
+    <div class="d-flex justify-content-around">
+      <ng-container *ngFor="let userAreaButton of userAreaButtons">
+        <app-custom-button [customDataButton]="{label:userAreaButton.label,classes: 'p-3 categories-btn', link:userAreaButton.link}"></app-custom-button>
+      </ng-container>
     </div>
-
-    <div>
-      <app-user-data></app-user-data>
-    </div>
+      <router-outlet></router-outlet>
   </div>
   `,
   styles: [
     `
-    #user-link {
-      width: 100%;
-      min-height: 80vh;
-      a {
-        margin: 1rem;
-        text-shadow: 0px 0px 17px rgba(255, 68, 128, 1);
-        color: white;
-        font-size: 1.5em;
-        padding: 1rem;
-        text-decoration: none;
-      }
+    .area {
+
+    }
+
+
+    @media  (max-width: 600px) {
+    .area {
+      font-size: 0.5em;
+    }
     }
     `
   ]
 })
 export class AreaComponent implements OnInit {
-  public user!:IUser;
+  public userAreaButtons = [
+    { label: 'Informazioni', link: '/area/information' },
+    { label: 'Gestisci Abbonamento', link: '/area/subscription' },
+    { label: 'Contatta il supporto', link: '/area/support' }
+  ]
 
-  constructor(private loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit(): void {
-   /* this.loginService.currentUser.subscribe(data => {
-      if(data){
-        console.log(data)
-        this.user = data;
-      }
-    })*/
+
   }
 
 }

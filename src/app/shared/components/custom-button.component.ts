@@ -13,7 +13,7 @@ export interface ICustomDataButton<T = unknown> {
   selector: 'app-custom-button',
   template: `
 
-      <button (click)="triggerFunction()" *ngIf="customDataButton.link && customDataButton.link.length > 0 else NoLink" [class]="customDataButton.classes"  class="custom-button btn   text-light active-link " routerLink="{{customDataButton.link}}" routerLinkActive="active-link">{{customDataButton.label}}</button>
+      <button (click)="triggerFunction()" *ngIf="customDataButton.link && customDataButton.link.length > 0 else NoLink" [class]="customDataButton.classes"  class="custom-button btn  text-light" routerLink="{{customDataButton.link}}" routerLinkActive="active-link">{{customDataButton.label}}</button>
 
     <ng-template #NoLink>
       <button (click)="triggerFunction()" [class]="customDataButton.classes" class="custom-button btn   text-light active-link " >{{customDataButton.label}}</button>
@@ -68,7 +68,6 @@ export class CustomButtonComponent implements OnInit {
   ngOnInit(): void {
   }
   triggerFunction () {
-    console.log('triggered')
     this.callFnFromOutside.emit(null);
   }
 }

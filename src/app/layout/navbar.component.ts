@@ -12,13 +12,17 @@ import { IUser } from 'src/app/shared/models/user.model';
       <app-logo></app-logo>
     </div>
     <div class="col-1"  *appResize="{operation:'createView', conditionMode:'reverse'}">
-      <app-hamburger (openElement)="showMenu()"></app-hamburger>
+      <app-hamburger (openElement)="this.isActive = !this.isActive;"></app-hamburger>
     </div>
 
     <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active gradient-bg':isActive} ">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/comedy"  routerLinkActive="active-link">Home</a>
-      <a class="mx-3" href="javascript:void(0)" routerLink="/area"  routerLinkActive="active-link">Area Personale</a>
+      <a class="mx-3" href="javascript:void(0)" routerLink="/area/edfferfer"  routerLinkActive="active-link" (mouseover)="isTooltipVisible = true">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
+    </div>
+
+    <div *ngIf="isTooltipVisible" class="position-absolute">
+      <app-tooltip (activateSomething)="isTooltipVisible = false"></app-tooltip>
     </div>
 
     <div id="user-tools-section" *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 col-sm-1  col-1 offset-1">
@@ -117,6 +121,8 @@ export class NavbarComponent implements OnInit {
   user!:IUser
   userMenu:boolean = false;
   isActive:boolean = false;
+  isTooltipVisible:boolean = false;
+
   constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit(): void {
@@ -130,9 +136,11 @@ export class NavbarComponent implements OnInit {
   }
   showMenu() {
     this.isActive = !this.isActive;
-    console.log(this.isActive)
   }
 
+  showTooltip (){
+
+  }
   logoutUser() {
     this.loginService.logout()
     this.loginService.currentUser.subscribe(data => {

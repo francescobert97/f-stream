@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-logo',
   template: `
-    <div id="logo" class="h-100 "></div>
+    <div id="logo" [class]="classes" class="h-100 "></div>
 
   `,
   styles: [
     `
-          #logo {
+      #logo {
         max-width: 15rem;
         min-height: 70px;
         background: url("../../../assets/images/F-Stream-logo.png") center;
@@ -18,7 +18,7 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class LogoComponent implements OnInit {
-
+@Input() classes:string = ''
   constructor() { }
 
   ngOnInit(): void {

@@ -4,5 +4,7 @@ export interface IUser {
     password: string,
     realname?: string,
     email: string,
-    eta?: number
+    eta?: number,
+    subscriptionDate:string,
+    id:number
 }
