@@ -8,8 +8,10 @@ import { IUser } from 'src/app/shared/models/user.model';
   selector: 'app-navbar',
   template: `
   <div class="row p-2 text-light">
-    <div id="logo" class="col-sm-3 h-100 col-8"></div>
-    <div class="col-1">
+    <div class="col-sm-3 col-8">
+      <app-logo></app-logo>
+    </div>
+    <div class="col-1"  *appResize="{operation:'createView', conditionMode:'reverse'}">
       <app-hamburger (openElement)="showMenu()"></app-hamburger>
     </div>
 
@@ -50,12 +52,7 @@ import { IUser } from 'src/app/shared/models/user.model';
         }
       }
 
-      #logo {
-        max-width: 15rem;
-        min-height: 70px;
-        background: url("../../assets/images/F-Stream-logo.png") center;
-        background-size: 110%;
-      }
+
 
       #user-tools-section {
         img {

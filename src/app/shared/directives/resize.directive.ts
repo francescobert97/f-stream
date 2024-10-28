@@ -1,50 +1,58 @@
-import { Directive, HostListener, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, HostListener, Input, Renderer2, TemplateRef, ViewContainerRef } from '@angular/core';
+
+export type ModeType = 'standard' | 'reverse';
+export interface IResize {
+  operation: 'createView' | 'let',
+  conditionMode:ModeType,
+
+}
+export interface IResizeClasses extends IResize {
+  classes:string
+}
 
 @Directive({
   selector: '[appResize]'
 })
 export class ResizeDirective {
-  conditionMode:'standard'| 'reverse' = 'standard'
-  @Input() set appResize(conditionToCheck:'standard'| 'reverse') {
-    this.updateView(conditionToCheck);
-    this.conditionMode = conditionToCheck;
+  resizeOperationsTypes:IResize | IResizeClasses = {operation: 'let', conditionMode:'standard'};
+  embeddedRef:any;
+  @Input() set appResize(data:IResize | IResizeClasses) {
+    this.resizeOperationsTypes = data;
+    this.executeRightOperation(data.conditionMode);
   }
-  alreadyExist:any;
-  constructor(private vcf:ViewContainerRef, private tf:TemplateRef<any>) {}
+  constructor(private vcf:ViewContainerRef, private tf:TemplateRef<any>,private renderer: Renderer2) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    this.updateView(this.conditionMode)
+    this.executeRightOperation(this.resizeOperationsTypes.conditionMode);
   }
 
-  updateView(condition:string) {
-    switch(condition) {
-      case 'standard':
-        if(window.innerWidth > 600 && !this.alreadyExist)this.alreadyExist = this.vcf.createEmbeddedView(this.tf)
-        if(window.innerWidth < 600) {
-          this.vcf.clear()
-          this.alreadyExist = null;
-        }
-        break;
-      case('reverse'):
-        if(window.innerWidth < 600 && !this.alreadyExist){this.alreadyExist = this.vcf.createEmbeddedView(this.tf)
-          console.log('ricreo')
-        }
-          if(window.innerWidth > 600) {
-            this.vcf.clear()
-            this.alreadyExist = null;
-          }
-          break;
+  executeRightOperation(condition:ModeType) {
+    const isLargeScreen = window.innerWidth > 600;
+    const operationType = this.resizeOperationsTypes.operation;
+    operationType === 'let' && !this.embeddedRef? this.createView() : null;
+
+    if(condition === 'standard') {
+      if(isLargeScreen ) operationType === 'createView' && !this.embeddedRef?this.createView() :  this.updateClasses('add');
+      if(!isLargeScreen && this.embeddedRef)operationType === 'createView'? this.clearView() : this.updateClasses('remove');
+    }else{
+        if(!isLargeScreen) operationType === 'createView' && !this.embeddedRef? this.createView() :  this.updateClasses('add');
+        if(isLargeScreen && this.embeddedRef) operationType === 'createView'? this.clearView() : this.updateClasses('remove');
     }
-
   }
+
+  createView() {
+    this.embeddedRef = this.vcf.createEmbeddedView(this.tf);
+  }
+  clearView() {
+    this.vcf.clear();
+    this.embeddedRef = null;
+  }
+
+  updateClasses(operation:'add'|'remove') {
+    operation === 'add'?
+    this.renderer.addClass(this.embeddedRef.rootNodes[0],(this.resizeOperationsTypes as IResizeClasses).classes) :
+    this.renderer.removeClass(this.embeddedRef.rootNodes[0], (this.resizeOperationsTypes as IResizeClasses).classes);
+  }
+
 }
-
-
-  /*  if(window.innerWidth > 600 && !this.alreadyExist) {
-     this.alreadyExist = this.vcf.createEmbeddedView(this.tf)
-    }
-     if(window.innerWidth < 600) {
-      this.vcf.clear()
-      this.alreadyExist = null;
-     }*/

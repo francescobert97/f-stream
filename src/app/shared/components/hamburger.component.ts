@@ -3,7 +3,7 @@ import { Component, input, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-hamburger',
   template: `
-      <div (click)="triggerFunction()" class="flex-column hamburger h-100  mx-auto" *appResize="'reverse'">
+      <div (click)="triggerFunction()" class="flex-column hamburger h-100  mx-auto">
         <span>____</span>
         <span>____</span>
         <span>____</span>

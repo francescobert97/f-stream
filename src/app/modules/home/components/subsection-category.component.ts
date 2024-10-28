@@ -6,9 +6,9 @@ import { CategoriesFilmService } from '../services/categories-film.service';
 @Component({
   selector: 'app-subsection-category',
   template: `
-<div id="section-category" class="mt-2 ">
-  <div class="d-flex justify-content-between  gap-3">
-    <p class="text-center  active-link">{{sectionTitle}}</p>
+<div id="section-category">
+  <div class="d-flex justify-content-between mt-2 gap-3">
+    <p class="text-center ms-4  active-link">{{sectionTitle}}</p>
     <app-search-bar [titles]="titles"></app-search-bar>
   </div>
 
@@ -16,7 +16,7 @@ import { CategoriesFilmService } from '../services/categories-film.service';
     <p>{{subCategory.label}}</p>
 
     <div class="position-relative">
-      <div *appResize="'standard'">
+      <div *appResize="{operation:'createView', conditionMode:'standard'}">
         <app-custom-button [customDataButton]="{label:'previous', classes:'position-absolute z-index-strong subsection-category-scroll-left gradient-bg p-3'}"  (callFnFromOutside)="scrollContainer('left', idx)"></app-custom-button>
         <app-custom-button  [customDataButton]="{label:'next',classes:'position-absolute z-index-strong subsection-category-scroll-right gradient-bg p-3'}" (callFnFromOutside)="scrollContainer('right', idx)"></app-custom-button>
       </div>
@@ -24,7 +24,7 @@ import { CategoriesFilmService } from '../services/categories-film.service';
 
         <div #containerToScroll  class="d-flex title-container">
             <ng-container *ngFor="let film of subCategory.films">
-            <app-title-card [movie]="film" ></app-title-card>
+              <app-title-card  app-title-card [movie]="film" ></app-title-card>
           </ng-container>
         </div>
     </div>
@@ -127,8 +127,7 @@ export class SubsectionCategoryComponent implements OnInit {
   }
 
   public scrollContainer(direction:string, index:number) {
-    console.log(index)
-    console.log(this.containersToScroll.toArray()[index].nativeElement)
+
    if(direction === 'right') this.containersToScroll.toArray()[index].nativeElement.scrollLeft += 300;
 
     if(direction === 'left') this.containersToScroll.toArray()[index].nativeElement.scrollLeft -= 300;

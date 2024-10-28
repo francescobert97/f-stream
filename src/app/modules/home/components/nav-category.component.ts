@@ -1,28 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IFilm } from 'src/app/shared/models/film.model';
-import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
+
 
 @Component({
   selector: 'app-nav-category',
   template: `
-  <div  class="">
-      <div id="nav-category" (click)="showList = !showList" class=" m-1 ">
+      <div id="nav-category" class=" m-1 ">
 
-        <app-custom-button [customDataButton]="{label:'Seleziona la categoria >',classes: 'p-3', link:''}"></app-custom-button>
+        <app-custom-button (callFnFromOutside)="test()" [customDataButton]="{label:'Seleziona la categoria >',classes: 'p-3', link:''}"></app-custom-button>
 
-        <div [ngClass]="{'gradient-bg': isSmallScreen}" class="category-list rounded p-1"  [class]="showList? 'visible-list' : 'hidden-list'">
-          <h5 class="p-3">Tutti i generi</h5>
-
+        <div  *appResize="{operation:'let', conditionMode:'reverse',classes:'gradient-bg'}"  class="category-list rounded p-1"  [class]="showList? 'visible-list' : 'hidden-list'">
           <ng-container *ngFor="let category of categories">
             <app-custom-button [customDataButton]="{label:category.label,classes: 'p-3 categories-btn w-100 overflow-hidden', link:category.path}"></app-custom-button>
-
           </ng-container>
-
         </div>
       </div>
-
-  </div>
   `,
   styles: [
     `
@@ -93,9 +85,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
   ]
 })
 export class NavCategoryComponent implements OnInit {
-public showList = false;
-public showLink = false;
-isSmallScreen = false;
+public showList:boolean = false;
 
 public categories = [
   { path: '/home/comedy', label: 'Commedia' },
@@ -110,11 +100,10 @@ public categories = [
   constructor( private route:Router) { }
 
   ngOnInit(): void {
-    window.innerWidth < 600 ? this.isSmallScreen = true : null;
   }
-
-
-  navigation() {
-    this.route.navigate(["/commedia", 'comedy'])
+  test() {
+    console.log('triggerato')
+    this.showList = !this.showList
+    console.log(this.showList)
   }
 }

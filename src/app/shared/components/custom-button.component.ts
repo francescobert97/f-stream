@@ -68,6 +68,7 @@ export class CustomButtonComponent implements OnInit {
   ngOnInit(): void {
   }
   triggerFunction () {
+    console.log('triggered')
     this.callFnFromOutside.emit(null);
   }
 }
