@@ -9,12 +9,14 @@ import { FooterComponent } from './layout/footer.component';
 import { UikitModule } from './shared/uikit/uikit.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoComponent } from './layout/components/logo.component';
+import { UserBarComponent } from './layout/components/user-bar.component';
 
 @NgModule({ declarations: [
         AppComponent,
         NavbarComponent,
         FooterComponent,
-        LogoComponent
+        LogoComponent,
+        UserBarComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ILogin } from './shared/models/login.model';
-import { LoginService } from './shared/services/login.service';
 
 @Component({
   selector: 'app-root',

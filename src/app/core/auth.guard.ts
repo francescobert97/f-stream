@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { getFromLocalStorage } from '../shared/utils/localstorage';
 
@@ -5,11 +6,11 @@ import { getFromLocalStorage } from '../shared/utils/localstorage';
   providedIn: 'root'
 })
 export class AuthGuard  {
-  constructor() {}
-  canActivate(): boolean {
-  return getFromLocalStorage('currentUser')? true : false;
+  constructor(private router:Router) {}
+  canActivate() {
+    console.log(getFromLocalStorage('currentUser'))
+   getFromLocalStorage('currentUser')? true : this.router.navigateByUrl('/');
+
   }
 
 }
-
-//CanActivateChild, CanDeactivate<unknown>, CanLoad

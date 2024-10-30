@@ -1,7 +1,9 @@
+import { IUser } from 'src/app/shared/models/user.model';
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IFilm } from 'src/app/shared/models/film.model';
 import { CategoriesFilmService } from '../services/categories-film.service';
+import { getFromLocalStorage } from 'src/app/shared/utils/localstorage';
 
 @Component({
   selector: 'app-subsection-category',
@@ -64,6 +66,7 @@ export class SubsectionCategoryComponent implements OnInit {
  public sectionTitle:string = '';
  public titles:IFilm[] = [];
  public areVisible:boolean = true;
+ user!:IUser;
   subCategories:any = [
      {
       label: 'Visti di recente',
@@ -77,13 +80,18 @@ export class SubsectionCategoryComponent implements OnInit {
       label:'Nuove uscite',
       films: []
     },
+    {
+      label:'Favourite movies',
+      films: []
+    },
 
   ]
 
   constructor(private route: ActivatedRoute, private categoriesService:CategoriesFilmService) { }
 
   ngOnInit(): void {
-
+   // this.user = getFromLocalStorage('currentUser') as IUser;
+    console.log(this.user)
     this.route.params.subscribe(param => {
       this.sectionTitle = param.category
        this.titles = this.categoriesService.getSpecificCategoryFilm(param.category)
@@ -103,16 +111,9 @@ export class SubsectionCategoryComponent implements OnInit {
         this.subCategories[2].films = this.titles.filter(title => Number(title.anno) === currentYear);
       break;
       case 'recentlySeen':
-
         this.subCategories[0].films = this.titles.filter(title => {
+            this.generateRandomLastWatchFilm(title);
 
-          if(title.id >= 300000) {
-              const rndmDate = new Date()
-              const dasottrarre =  Math.floor(Math.max(1, Math.random() * 7));
-               rndmDate.setDate(rndmDate.getDate() - dasottrarre)
-              const dateoftoday = `${rndmDate.getFullYear()}/${rndmDate.getMonth() + 1}/${rndmDate.getDate()}`
-              title.lastWatch = dateoftoday
-          }
           if(title.lastWatch === 'never') return false;
 
           const dateOfOneWeekAgo = new Date()
@@ -121,9 +122,12 @@ export class SubsectionCategoryComponent implements OnInit {
         return lastWatch >= dateOfOneWeekAgo? true : false;
         })
       break;
+      case 'favourite':
+        console.log(this.user)
+         this.subCategories[3].films = this.user.favouriteFilms;
+       break;
     }
-    const currentYear = new Date().getFullYear()
-    this.subCategories[2].films = this.titles.filter(title => Number(title.anno) === currentYear);
+
   }
 
   public scrollContainer(direction:string, index:number) {
@@ -132,6 +136,17 @@ export class SubsectionCategoryComponent implements OnInit {
 
     if(direction === 'left') this.containersToScroll.toArray()[index].nativeElement.scrollLeft -= 300;
 
+  }
+
+  private generateRandomLastWatchFilm(title:IFilm) {
+
+    if(title.id>= 300000) {
+      const rndmDate = new Date()
+      const dasottrarre =  Math.floor(Math.max(1, Math.random() * 7));
+       rndmDate.setDate(rndmDate.getDate() - dasottrarre)
+      const dateoftoday = `${rndmDate.getFullYear()}/${rndmDate.getMonth() + 1}/${rndmDate.getDate()}`
+      title.lastWatch = dateoftoday
+  }
   }
 
 

@@ -18,6 +18,8 @@ import { saveTolocalStorage } from 'src/app/shared/utils/localstorage';
           <span class="mx-2">Uscita: {{movie.anno}}</span>
           <span class="mx-2">Durata: {{movie.durata}}</span>
         </div>
+
+
       </div>
 
   </div>
@@ -92,7 +94,8 @@ public  openPlayer () {
     this.movie.lastWatch = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay() < 10? '0'+ date.getDay() : date.getDay()}`;
     this.titlesStream.updateFilm(this.movie);
 
-    const currentMovie = this.titlesStream.getFilm({id, genere})
+    const currentMovie = this.movie
+
     saveTolocalStorage('currentMovieWatched', currentMovie)
     this.router.navigate([`/player`], {queryParams:{id, genere}})
 

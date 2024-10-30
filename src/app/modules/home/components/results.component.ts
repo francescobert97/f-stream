@@ -13,7 +13,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
       </ng-container>
     </div>
 
-    <app-custom-button [customDataButton]="{label: 'Torna ai titoli',classes: '', link:''}" routerLink="/home/commedia/comedy"></app-custom-button>
+    <app-custom-button [customDataButton]="{label: 'Torna ai titoli',classes: '', link:'/home/comedy'}" ></app-custom-button>
 
 
   </div>

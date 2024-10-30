@@ -1,6 +1,6 @@
 import { CategoriesFilmService } from './../../modules/home/services/categories-film.service';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { FILMS } from 'src/app/shared/models/film-mock';
 import { IFilm, MOVIE_FALLBACK } from 'src/app/shared/models/film.model';
 @Injectable({
@@ -11,19 +11,20 @@ export class TitlesStreamService {
   private observableFilm = new BehaviorSubject<IFilm[]>(this.Films);
   public filmObs$ = this.observableFilm.asObservable();
   private titlesSearchUpdate =  new BehaviorSubject<IFilm[]>(this.Films);
-  searchBar$ = this.titlesSearchUpdate.asObservable();
+  public searchBar$:Observable<IFilm[]> = this.titlesSearchUpdate.asObservable();
+
   constructor(private categoriesService:CategoriesFilmService) { }
 
-  getAll() {
+  getAll():Observable<IFilm[]> {
     return this.filmObs$;
   }
 
-  getSearchBar(filmtoLookUp:string) {
+  getSearchBar(filmtoLookUp:string):void {
     const results =  this.Films.filter(film => film.titolo.toLowerCase().includes(filmtoLookUp));
     this.titlesSearchUpdate.next(results);
   }
-  updateFilm(filmToUpdate:IFilm) {
-    this.Films.map(film => {
+  updateFilm(filmToUpdate:IFilm):void {
+     this.Films.map(film => {
       film.id === filmToUpdate.id ? filmToUpdate : film
     })
   }

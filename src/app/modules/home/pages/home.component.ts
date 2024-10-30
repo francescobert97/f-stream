@@ -1,3 +1,4 @@
+import { LoginService } from 'src/app/shared/services/login.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -11,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class HomeComponent implements OnInit {
-  constructor() { }
+  constructor(private loginService:LoginService) { }
 
   ngOnInit(): void {
   }

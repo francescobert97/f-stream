@@ -21,7 +21,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
 })
 export class UserDataComponent implements OnInit {
   public user!:IUser;
-  constructor(private loginService: LoginService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.currentUser)

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlayerContainerComponent } from './pages/player-container.component';
 import { MovieGuard } from 'src/app/core/movie.guard';
+import { AuthGuard } from 'src/app/core/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
     children: [
       {path: ':movieId', component: PlayerContainerComponent },
     ],
-    canActivate: [MovieGuard]
+    canActivate: [AuthGuard,MovieGuard]
     },
 ];
 

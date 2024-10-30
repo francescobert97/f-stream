@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { IUser } from './../shared/models/user.model';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router } from '@angular/router';
-import { IUser } from 'src/app/shared/models/user.model';
-
+import { USER_FALLBACK } from 'src/app/shared/models/user.model';
+import { of, Subscription, timer } from 'rxjs';
+import { exhaustMap, tap } from 'rxjs/operators';
+import { getFromLocalStorage } from '../shared/utils/localstorage';
 
 @Component({
   selector: 'app-navbar',
@@ -17,29 +20,17 @@ import { IUser } from 'src/app/shared/models/user.model';
 
     <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active gradient-bg':isActive} ">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/comedy"  routerLinkActive="active-link">Home</a>
-      <a class="mx-3" href="javascript:void(0)" routerLink="/area/edfferfer"  routerLinkActive="active-link" (mouseover)="isTooltipVisible = true">Area Personale</a>
+      <a #ref class="mx-3" href="javascript:void(0)" routerLink="/area/blocked"  routerLinkActive="active-link" (mouseover)="showTooltip()">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
     </div>
 
-    <div *ngIf="isTooltipVisible" class="position-absolute">
-      <app-tooltip (activateSomething)="isTooltipVisible = false"></app-tooltip>
+    <div *ngIf="isTooltipVisible" class="position-absolute z-index-moreover top-sm-50 bottom-0 mb-5">
+      <app-tooltip></app-tooltip>
     </div>
 
-    <div id="user-tools-section" *ngIf="user; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 col-sm-1  col-1 offset-1">
-        <img src="{{user?.picture}}">
-        <p class="mx-4">{{user?.username}}</p>
+    <div class="h-100 col-sm-1  col-1 offset-1">
+      <app-user-bar [user]="user" (showTooltip)="isTooltipVisible = !isTooltipVisible"></app-user-bar>
     </div>
-
-    <div class="d-flex flex-column align-items-center" id="user-menu" *ngIf="userMenu">
-        <p class="mx-4 d-none">{{user?.username}}</p>
-        <p>email:{{user.email}}</p>
-        <a href="javascript:void(0)" routerLink="/area">Vedi le informazioni complete</a>
-        <app-custom-button (callFnFromOutside)="logoutUser()" [customDataButton]="{label: 'Logout',classes: '',link:'/'}"></app-custom-button>
-      </div>
-
-    <ng-template #notlog>
-      <p class="mt-2">Not Logged</p>
-    </ng-template>
   </div>
 
   `,
@@ -56,26 +47,6 @@ import { IUser } from 'src/app/shared/models/user.model';
         }
       }
 
-
-
-      #user-tools-section {
-        img {
-          height: 100%;
-          width: clamp(2rem, 4rem, 6rem);
-          border-radius: 10px;
-        }
-      }
-
-
-      #user-menu {
-        position: absolute;
-        top: 90%;
-        right: 0;
-        a {
-          font-size: 0.7em;
-          text-decoration: underline
-        }
-      }
 
       .navbar-links {
         display:flex;
@@ -96,17 +67,6 @@ import { IUser } from 'src/app/shared/models/user.model';
         background: url("../../assets/images/F-Stream-logo.png") center;
         background-size: 110%;
       }
-
-      #user-tools-section {
-        img {
-          zoom: 70%;
-        }
-      p:first-of-type{
-        display:none;
-      }
-      }
-
-
     .navbar-links {
       display:none;
       flex-direction: column;
@@ -118,34 +78,34 @@ import { IUser } from 'src/app/shared/models/user.model';
   ]
 })
 export class NavbarComponent implements OnInit {
-  user!:IUser
+  user!:IUser;
   userMenu:boolean = false;
   isActive:boolean = false;
   isTooltipVisible:boolean = false;
-
-  constructor(private loginService: LoginService, private router:Router) { }
+  newSubscription:Subscription = new Subscription()
+  constructor(private loginService: LoginService, private router:Router, private CD:ChangeDetectorRef) { }
 
   ngOnInit(): void {
-
-    this.loginService.currentUser.subscribe(data => {
-      if(localStorage.currentUser) {
-        this.user = JSON.parse(localStorage.currentUser)
-      }
-    })
-
+   // this.loginService.currentUser$.subscribe((user:IUser) => user?this.user = user : this.router.navigateByUrl('/'));
+    this.user = getFromLocalStorage('currentUser') as IUser;
+    console.log(this.user)
   }
   showMenu() {
     this.isActive = !this.isActive;
   }
 
   showTooltip (){
+  this.newSubscription.unsubscribe()
+  const obs$ =  of(true).pipe(
+    tap(data => this.isTooltipVisible = true),
+      exhaustMap(() => timer(3000)),
+      tap(data => this.isTooltipVisible = false)
+    )
+   this.newSubscription =  obs$.subscribe(data =>console.log(this.isTooltipVisible))
 
   }
   logoutUser() {
     this.loginService.logout()
-    this.loginService.currentUser.subscribe(data => {
-      this.user = data;
-    })
     //this.router.navigateByUrl('')
   }
 

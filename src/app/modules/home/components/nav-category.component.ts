@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 
         <div  *appResize="{operation:'let', conditionMode:'reverse',classes:'gradient-bg'}"  class="category-list rounded p-1"  [class]="showList? 'visible-list' : 'hidden-list'">
           <ng-container *ngFor="let category of categories">
-            <app-custom-button [customDataButton]="{label:category.label,classes: 'p-3 categories-btn w-100 overflow-hidden', link:category.path}"></app-custom-button>
+            <app-custom-button (callFnFromOutside)="showList = !showList" [customDataButton]="{label:category.label,classes: 'p-3 categories-btn w-100 overflow-hidden', link:category.path}"></app-custom-button>
           </ng-container>
         </div>
       </div>
