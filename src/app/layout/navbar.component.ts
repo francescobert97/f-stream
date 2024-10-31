@@ -1,4 +1,4 @@
-import { IUser } from './../shared/models/user.model';
+import { IUser, USER_FALLBACK } from './../shared/models/user.model';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router } from '@angular/router';
@@ -12,11 +12,11 @@ import { exhaustMap, tap } from 'rxjs/operators';
     <div class="col-sm-3 col-8">
       <app-logo></app-logo>
     </div>
-    <div class="col-1"  *appResize="{operation:'createView', conditionMode:'reverse', width: 600}">
+    <div class="col-1"  *appResize="{operation:'createView', conditionMode:'reverse', width: 800}">
       <app-hamburger (openElement)="this.isActive = !this.isActive;"></app-hamburger>
     </div>
 
-    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active gradient-bg':isActive} ">
+    <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active gradient-bg':isActive}">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/comedy"  routerLinkActive="active-link">Home</a>
       <a #ref class="mx-3" href="javascript:void(0)" routerLink="/area/blocked"  routerLinkActive="active-link" (mouseover)="showTooltip()">Area Personale</a>
       <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
@@ -26,7 +26,7 @@ import { exhaustMap, tap } from 'rxjs/operators';
       <app-tooltip></app-tooltip>
     </div>
 
-    <div class="h-100 col-sm-1  col-1 offset-1">
+    <div class="h-100 col-sm-1 col-md-1  col-1 mx-auto">
       <app-user-bar [user]="user" (showTooltip)="isTooltipVisible = !isTooltipVisible"></app-user-bar>
     </div>
   </div>
@@ -49,11 +49,12 @@ import { exhaustMap, tap } from 'rxjs/operators';
       .navbar-links {
         display:flex;
         justify-content: center;
+        align-items: center;
       }
       .active {
         display:flex!important;
         position:absolute;
-        top:10%;
+        top:5.8rem;
         left: 0;
       }
 
@@ -67,27 +68,36 @@ import { exhaustMap, tap } from 'rxjs/operators';
       }
     .navbar-links {
       display:none;
+      width: 100%;
       flex-direction: column;
       z-index: 100;
+      font-size: 1em;
+
     }
   }
 
+  @media (max-width: 800px) {
+    .navbar-links {
+      display:none;
+      width: 100%;
+      flex-direction: column;
+      z-index: 100;
+      font-size: 1em;
+    }
+  }
   `
   ]
 })
 export class NavbarComponent implements OnInit {
-  user!:IUser;
+  user:IUser = USER_FALLBACK;
   userMenu:boolean = false;
   isActive:boolean = false;
   isTooltipVisible:boolean = false;
   newSubscription:Subscription = new Subscription()
-  constructor(private loginService: LoginService, private router:Router, private CD:ChangeDetectorRef) { }
+  constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit(): void {
     this.loginService.currentUser$.subscribe((user:IUser) => user?this.user = user : this.router.navigateByUrl('/'));
-  }
-  showMenu() {
-    this.isActive = !this.isActive;
   }
 
   showTooltip (){
@@ -97,7 +107,7 @@ export class NavbarComponent implements OnInit {
       exhaustMap(() => timer(3000)),
       tap(data => this.isTooltipVisible = false)
     )
-   this.newSubscription =  obs$.subscribe(data =>console.log(this.isTooltipVisible))
+   this.newSubscription =  obs$.subscribe()
 
   }
   logoutUser() {

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   template: `
   <div class="container-fluid d-flex flex-column vh-100">
       <app-navbar></app-navbar>
-      <div class="text-light content">
+      <div class="text-light content overflow-scroll scrollbar-none">
         <router-outlet></router-outlet>
       </div>
         <app-footer></app-footer>
@@ -17,6 +17,8 @@ import { Component, OnInit } from '@angular/core';
       flex-grow:1;
       width:100%;
       height: 100%;
+      overflow: scroll;
+      scrollbar-width:none;
     }
     `
   ]

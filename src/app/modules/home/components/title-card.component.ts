@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit,Input } from '@angular/core';
 import { IFilm, MOVIE_FALLBACK } from 'src/app/shared/models/film.model';
-import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
 import { saveTolocalStorage } from 'src/app/shared/utils/localstorage';
 
 @Component({
@@ -80,7 +79,7 @@ export class TitleCardComponent implements OnInit {
   @Input() movie:IFilm = MOVIE_FALLBACK;
   public showDet:boolean = false;
 
-  constructor(private router:Router,private titlesStream: TitlesStreamService) { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }

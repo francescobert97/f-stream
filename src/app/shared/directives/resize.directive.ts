@@ -4,7 +4,7 @@ export type ModeType = 'standard' | 'reverse';
 export interface IResize {
   operation: 'createView' | 'let',
   conditionMode:ModeType,
-  width: number
+  width?: number
 
 }
 export interface IResizeClasses extends IResize {
@@ -29,7 +29,7 @@ export class ResizeDirective {
   }
 
   executeRightOperation(condition:ModeType) {
-    const isLargeScreen = window.innerWidth > this.resizeOperationsTypes.width;
+    const isLargeScreen = window.innerWidth > (this.resizeOperationsTypes.width || 600);
     const operationType = this.resizeOperationsTypes.operation;
     operationType === 'let' && !this.embeddedRef? this.createView() : null;
 

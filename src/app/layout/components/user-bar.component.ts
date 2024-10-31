@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
-import { IUser } from 'src/app/shared/models/user.model';
+import { IUser, USER_FALLBACK } from 'src/app/shared/models/user.model';
 import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
@@ -8,11 +8,13 @@ import { LoginService } from 'src/app/shared/services/login.service';
 
     <div id="user-tools-section" *ngIf="user.id > 0; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-sm-2 text-light active-link p-2">
         <img src="{{user.picture}}">
-        <p class="mx-4">{{user.username}}</p>
+        <p *appResize="{operation:'createView', conditionMode:'standard'}" class="mx-4">{{user.username}}</p>
     </div>
-  <div class="d-flex flex-column align-items-center  gradient-bg" id="user-menu" *ngIf="userMenu">
+  <div class="d-flex flex-column align-items-center gap-3 gradient-bg active-link p-2 z-index-moreover" id="user-menu" *ngIf="userMenu">
+        <p *appResize="{operation:'createView', conditionMode:'reverse'}" class="mx-4">{{user.username}}</p>
+
         <p>email:{{user.email}}</p>
-        <a href="javascript:void(0)" routerLink="/area/blocked"  (mouseover)="triggerTooltip()">Vedi le informazioni complete</a>
+        <a href="javascript:void(0)" class="text-light" routerLink=""  (mouseover)="triggerTooltip()">Vedi le informazioni complete</a>
         <app-custom-button (callFnFromOutside)="logoutUser()" [customDataButton]="{label: 'Logout',classes: '',link:'/'}"></app-custom-button>
   </div>
 
@@ -24,22 +26,26 @@ import { LoginService } from 'src/app/shared/services/login.service';
     `
 
     #user-tools-section {
+      min-width: 80px;
       img {
         height: 100%;
         min-height:60px;
-        width: clamp(2rem, 4rem, 6rem);
+        width:100%;
         border-radius: 10px;
+      }
+      p {
+        text-shadow: var(--text-shadow);
       }
     }
 
     #user-menu {
         position: absolute;
-        width: 5%;
-        top: 7%;
-        left:92%;
+        width: 100%;
+        max-width: 11rem;
+        top: 7.2rem;
+        right: 3.9rem;
         text-decoration: none;
 
-        right: 0;
         a {
           font-size: 0.7em;
           text-decoration: underline
@@ -50,13 +56,18 @@ import { LoginService } from 'src/app/shared/services/login.service';
     @media (max-width: 600px) {
 
     #user-tools-section {
+      min-width: 60px;
           img {
-            zoom: 80%;
+
           }
         p:first-of-type{
           display:none;
 
         }
+      }
+      #user-menu {
+        right: 1rem;
+        max-width: 8rem;
       }
     }
   `
@@ -64,7 +75,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
 })
 export class UserBarComponent implements OnInit {
   userMenu:boolean = false;
-  @Input() user!:IUser;
+  @Input() user:IUser = USER_FALLBACK;
   @Output() showTooltip = new EventEmitter<any>()
   constructor(private loginService:LoginService) { }
 
@@ -77,6 +88,6 @@ export class UserBarComponent implements OnInit {
 
   logoutUser() {
     this.loginService.logout()
-    //this.router.navigateByUrl('')
+    this.userMenu = !this.userMenu;
   }
 }

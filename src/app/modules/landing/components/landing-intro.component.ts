@@ -3,114 +3,47 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-landing-intro',
   template: `
-  <div [style.top]="animation.showFirstA? null : '-9999px' " id="animation-1" class="bg-dark"></div>
-
-  <div id="animation-3" [style.left]="animation.showThirdA? null : '-9999px' " class="bg-dark"></div>
-
-  <div *ngIf="animation.showFourthA;" id="video-logo">
-    <img [class]="animation.logoEffect? 'logo-animation' : null " src="../../../../assets/images/F-Stream.png">
-  </div>
-
-  <div id="animation-4" [style.right]="animation.showFourthA? null : '-9999px' " class="bg-dark"></div>
-
-  <div [style.bottom]="animation.showSecondA? null : '-9999px' " id="animation-2" class="bg-dark"></div>
+<div class="bg-white w-100 h-100">
+  <div class="animation-2024 w-100 h-100 d-flex justify-content-center align-items-center"><img src="../../../../assets/images/F-Stream.png">
+</div>
   `,
   styles: [
     `
-    #animation-1 {
-      height: 50vh;
-      width: 100vw;
-      position:absolute;
-      top: 0;
-      transition: 1.5s;
-      z-index: 998;
-      -webkit-box-shadow: var(--hover-shadow-box);
-      box-shadow: var(--hover-shadow-box);
-    }
-
-    #video-logo {
-      z-index: 999;
-      position:absolute;
-      top: 31%;
-      left: 36%;
-      transition: 3s;
-      img {
-        transition: 1.6s;
-        width: 350px;
-        z-index: 1001;
-        border-radius: 50%;
-        -webkit-box-shadow: var(--hover-shadow-box);
-        box-shadow: var(--hover-shadow-box);
+    @keyframes logoAn {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
-    #animation-2 {
-      height: 50vh;
-      width: 100vw;
-      bottom: 0;
-      left: 0;
-      position: absolute;
-      transition: 1.5s;
-      z-index: 998;
-      -webkit-box-shadow: var(--hover-shadow-box);
-      box-shadow: var(--hover-shadow-box);
+    .animation-2024 {
+      animation: logoAn 1.5s ease-out forwards;
+      img {
+      }
+    }
+    .bg-white {
+      background: #fff;
     }
 
-    #animation-3 {
-      height: 100vh;
-      width: 50vw;
-      left: 0;
-      position: absolute;
-      transition: 1.5s;
-      z-index: 997;
-      -webkit-box-shadow: var(--hover-shadow-box);
-      box-shadow: var(--hover-shadow-box);
+    @media(max-width: 600px) {
+      .animation-2024 {
+        img {
+          zoom:70%;
+        }
+      }
     }
-
-    #animation-4 {
-      height: 100vh;
-      width: 50vw;
-      right: 0;
-      position: absolute;
-      transition: 1.5s;
-      z-index: 997;
-      -webkit-box-shadow: var(--hover-shadow-box);
-      box-shadow: var(--hover-shadow-box);
-    }
-
-    .logo-animation {
-      transform: rotate(-710deg) scale(34.9);
-    }
-
     `
   ]
 })
 export class LandingIntroComponent implements OnInit {
-public animation = {
-  showFirstA: true,
-  showSecondA: true,
-  showThirdA: true,
-  showFourthA: true,
-  logoEffect: true
-}
 
 
   constructor() { }
 
   ngOnInit(): void {
-    this.introAnimation()
-  }
-
-  public introAnimation() {
-    setTimeout(() => this.animation.logoEffect = false, 200);
-
-    setTimeout(() => this.animation.showFirstA = false,  3400);
-
-    setTimeout(() => this.animation.showSecondA = false, 3700);
-
-    setTimeout(() => this.animation.showThirdA = false,  4000);
-
-    setTimeout(() => this.animation.showFourthA = false, 4300);
-
   }
 }

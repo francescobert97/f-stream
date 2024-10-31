@@ -30,7 +30,7 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
 
-  public closeAnimation = false;
+  public closeAnimation = true;
 
   constructor( private router: Router) { }
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class LandingComponent implements OnInit {
 
     setTimeout(() => {
       this.closeAnimation = false
-    }, 4700);
+    }, 1700);
   }
 
 }

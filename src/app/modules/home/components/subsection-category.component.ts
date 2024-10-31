@@ -23,15 +23,18 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
       </div>
 
 
-        <div #containerToScroll  class="d-flex title-container">
+        <div #containerToScroll  class="d-flex title-container"  *ngIf="subCategory.films.length > 0; else noMovie">
             <ng-container *ngFor="let film of subCategory.films">
               <app-title-card  app-title-card [movie]="film" ></app-title-card>
           </ng-container>
         </div>
     </div>
+
+    <ng-template #noMovie>
+      <p class="d-flex justify-content-center">There is no movie in this section!</p>
+    </ng-template>
+
   </ng-container>
-
-
 </div>
   `,
   styles: [
