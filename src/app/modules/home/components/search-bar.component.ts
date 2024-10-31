@@ -1,13 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { IFilm } from '../../../shared/models/film.model';
 import { TitlesStreamService } from '../../../shared/services/titles-stream.service';
 
 @Component({
   selector: 'app-search-bar',
   template: `
-    <div id="search-bar" class="d-flex justify-content-between text-light ">
+    <div id="search-bar" class=" text-light ">
       <input class="text-light me-3 bg-none" (change)="search()" [(ngModel)]="searchTerm" type="search" placeholder="Cerca film da guardare">
       <button (click)="search()" type="button" class="text-light bg-none">Cerca</button>
     </div>
@@ -38,6 +36,7 @@ import { TitlesStreamService } from '../../../shared/services/titles-stream.serv
     @media (max-width: 600px) {
       #search-bar {
         padding: 8px 1.5rem;
+        max-width: 225px;
         button {
           font-size:1.5em;
         }

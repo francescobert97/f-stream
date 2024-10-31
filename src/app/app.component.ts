@@ -17,8 +17,10 @@ import { Component, OnInit } from '@angular/core';
       flex-grow:1;
       width:100%;
       height: 100%;
-      overflow: scroll;
+      overflow-y: scroll;
       scrollbar-width:none;
+      overflow-x: none;
+
     }
     `
   ]
