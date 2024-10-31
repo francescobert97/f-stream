@@ -6,8 +6,8 @@ import { LoginService } from 'src/app/shared/services/login.service';
   selector: 'app-user-data',
   template: `
   <div id="area" class="ms-4  m-2 text-light active-link">
-    <p>{{user?.username}}</p>
-    <p>{{user?.email}}</p>
+    <p>{{user.username}}</p>
+    <p>{{user.email}}</p>
   </div>
   `,
   styles: [
@@ -24,6 +24,5 @@ export class UserDataComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.currentUser)
   }
 }

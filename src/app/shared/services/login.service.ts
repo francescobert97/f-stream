@@ -1,16 +1,16 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import { tap} from 'rxjs/operators'
-import { IUser } from 'src/app/shared/models/user.model';
+import { IUser, USER_FALLBACK } from 'src/app/shared/models/user.model';
 import { getFromLocalStorage, saveTolocalStorage } from '../utils/localstorage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  currentUser$ = new Subject<IUser>();
+  currentUser$ = new BehaviorSubject<IUser>(getFromLocalStorage('currentUser') as IUser);
   constructor(private httpClient: HttpClient) { }
 
   newUser(user:IUser):Observable<IUser> {
@@ -27,27 +27,20 @@ export class LoginService {
       tap(users => {
         const userLogged = {id: user.id, username:user.username, password:user.password, picture: '../../../assets/sasuke.jpeg', email: 'admin-test@gmail.com', subscriptionDate: '2022/04/10', favouriteFilms: []}
         saveTolocalStorage('currentUser',  JSON.stringify(userLogged))
-
+        this.currentUser$.next(userLogged)
       })
       ) :
       of(guestUser).pipe(
         tap((guestData:any) =>{
         saveTolocalStorage('currentUser', guestData);
+        this.currentUser$.next(guestData);
+
       })
   )
 }
 
-getUpdatedUser() {
-  const userLogged = getFromLocalStorage('currentUser') as IUser
-//  this.currentUser$.next(userLogged)
-}
-
-updateUser(user:IUser) {
-  saveTolocalStorage('currentUser', user);
-//  const userLogged = getFromLocalStorage('currentUser') as IUser
-
-}
   logout() {
     localStorage.removeItem('currentUser');
+    this.currentUser$.next(USER_FALLBACK)
   }
 }

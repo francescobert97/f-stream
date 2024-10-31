@@ -6,12 +6,11 @@ import { LoginService } from 'src/app/shared/services/login.service';
   selector: 'app-user-bar',
   template: `
 
-    <div id="user-tools-section" *ngIf="user.id > 0; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-2 text-light">
+    <div id="user-tools-section" *ngIf="user.id > 0; else notlog" (click)="userMenu = !userMenu" class="d-flex align-items-center mt-sm-2 text-light active-link p-2">
         <img src="{{user.picture}}">
         <p class="mx-4">{{user.username}}</p>
     </div>
   <div class="d-flex flex-column align-items-center  gradient-bg" id="user-menu" *ngIf="userMenu">
-        <p class="mx-4 d-none">{{user.username}}</p>
         <p>email:{{user.email}}</p>
         <a href="javascript:void(0)" routerLink="/area/blocked"  (mouseover)="triggerTooltip()">Vedi le informazioni complete</a>
         <app-custom-button (callFnFromOutside)="logoutUser()" [customDataButton]="{label: 'Logout',classes: '',link:'/'}"></app-custom-button>
@@ -27,6 +26,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
     #user-tools-section {
       img {
         height: 100%;
+        min-height:60px;
         width: clamp(2rem, 4rem, 6rem);
         border-radius: 10px;
       }
@@ -48,17 +48,17 @@ import { LoginService } from 'src/app/shared/services/login.service';
 
 
     @media (max-width: 600px) {
-    }
+
     #user-tools-section {
-        img {
-          zoom: 70%;
+          img {
+            zoom: 80%;
+          }
+        p:first-of-type{
+          display:none;
+
         }
-      p:first-of-type{
-        display:none;
       }
-      }
-
-
+    }
   `
   ]
 })

@@ -1,4 +1,4 @@
-import { FilmCategories } from "src/app/modules/home/services/categories-film.service";
+import { FilmCategories } from "../services/titles-stream.service"
 
 export interface IFilm {
     id: number,

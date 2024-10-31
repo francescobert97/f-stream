@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IFilm, MOVIE_FALLBACK } from 'src/app/shared/models/film.model';
+import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
 
 @Component({
   selector: 'app-video-player',
@@ -25,9 +26,12 @@ import { IFilm, MOVIE_FALLBACK } from 'src/app/shared/models/film.model';
 export class VideoPlayerComponent implements OnInit {
 @Input() movie:IFilm = MOVIE_FALLBACK
 @Output() closeVideoplayer = new EventEmitter();
-  constructor() { }
+  constructor(private titlesStream: TitlesStreamService) { }
 
   ngOnInit(): void {
+    const date = new Date();
+    this.movie.lastWatch = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay() < 10? '0'+ date.getDay() : date.getDay()}`;
+    this.titlesStream.updateFilm(this.movie);
   }
 
   closePlayer() {

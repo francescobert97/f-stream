@@ -2,10 +2,8 @@ import { IUser } from './../shared/models/user.model';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/shared/services/login.service';
 import { Router } from '@angular/router';
-import { USER_FALLBACK } from 'src/app/shared/models/user.model';
 import { of, Subscription, timer } from 'rxjs';
 import { exhaustMap, tap } from 'rxjs/operators';
-import { getFromLocalStorage } from '../shared/utils/localstorage';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +12,7 @@ import { getFromLocalStorage } from '../shared/utils/localstorage';
     <div class="col-sm-3 col-8">
       <app-logo></app-logo>
     </div>
-    <div class="col-1"  *appResize="{operation:'createView', conditionMode:'reverse'}">
+    <div class="col-1"  *appResize="{operation:'createView', conditionMode:'reverse', width: 600}">
       <app-hamburger (openElement)="this.isActive = !this.isActive;"></app-hamburger>
     </div>
 
@@ -86,9 +84,7 @@ export class NavbarComponent implements OnInit {
   constructor(private loginService: LoginService, private router:Router, private CD:ChangeDetectorRef) { }
 
   ngOnInit(): void {
-   // this.loginService.currentUser$.subscribe((user:IUser) => user?this.user = user : this.router.navigateByUrl('/'));
-    this.user = getFromLocalStorage('currentUser') as IUser;
-    console.log(this.user)
+    this.loginService.currentUser$.subscribe((user:IUser) => user?this.user = user : this.router.navigateByUrl('/'));
   }
   showMenu() {
     this.isActive = !this.isActive;
@@ -106,7 +102,6 @@ export class NavbarComponent implements OnInit {
   }
   logoutUser() {
     this.loginService.logout()
-    //this.router.navigateByUrl('')
   }
 
 }

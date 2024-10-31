@@ -1,5 +1,5 @@
-import { Router, ParamMap } from '@angular/router';
-import { Component, OnInit, Output, EventEmitter, Input, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit,Input } from '@angular/core';
 import { IFilm, MOVIE_FALLBACK } from 'src/app/shared/models/film.model';
 import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
 import { saveTolocalStorage } from 'src/app/shared/utils/localstorage';
@@ -89,14 +89,7 @@ export class TitleCardComponent implements OnInit {
 
 public  openPlayer () {
     const {id, genere } = this.movie
-    const date = new Date();
-
-    this.movie.lastWatch = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDay() < 10? '0'+ date.getDay() : date.getDay()}`;
-    this.titlesStream.updateFilm(this.movie);
-
-    const currentMovie = this.movie
-
-    saveTolocalStorage('currentMovieWatched', currentMovie)
+   saveTolocalStorage('currentMovieWatched', this.movie)
     this.router.navigate([`/player`], {queryParams:{id, genere}})
 
   }

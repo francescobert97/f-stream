@@ -1,24 +1,23 @@
-import { IUser } from 'src/app/shared/models/user.model';
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IFilm } from 'src/app/shared/models/film.model';
-import { CategoriesFilmService } from '../services/categories-film.service';
-import { getFromLocalStorage } from 'src/app/shared/utils/localstorage';
+import { LoginService } from 'src/app/shared/services/login.service';
+import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
 
 @Component({
   selector: 'app-subsection-category',
   template: `
-<div id="section-category">
+<div id="section-category" class="">
   <div class="d-flex justify-content-between mt-2 gap-3">
     <p class="text-center ms-4  active-link">{{sectionTitle}}</p>
-    <app-search-bar [titles]="titles"></app-search-bar>
+    <app-search-bar></app-search-bar>
   </div>
 
   <ng-container *ngFor="let subCategory of subCategories; let idx = index">
     <p>{{subCategory.label}}</p>
 
     <div class="position-relative">
-      <div *appResize="{operation:'createView', conditionMode:'standard'}">
+      <div *appResize="{operation:'createView', conditionMode:'standard', width: 600}">
         <app-custom-button [customDataButton]="{label:'previous', classes:'position-absolute z-index-strong subsection-category-scroll-left gradient-bg p-3'}"  (callFnFromOutside)="scrollContainer('left', idx)"></app-custom-button>
         <app-custom-button  [customDataButton]="{label:'next',classes:'position-absolute z-index-strong subsection-category-scroll-right gradient-bg p-3'}" (callFnFromOutside)="scrollContainer('right', idx)"></app-custom-button>
       </div>
@@ -38,6 +37,7 @@ import { getFromLocalStorage } from 'src/app/shared/utils/localstorage';
   styles: [
     `
     #section-category {
+
       p {
         text-shadow:var(--text-shadow);
         font-size: 2em;
@@ -66,7 +66,6 @@ export class SubsectionCategoryComponent implements OnInit {
  public sectionTitle:string = '';
  public titles:IFilm[] = [];
  public areVisible:boolean = true;
- user!:IUser;
   subCategories:any = [
      {
       label: 'Visti di recente',
@@ -87,18 +86,17 @@ export class SubsectionCategoryComponent implements OnInit {
 
   ]
 
-  constructor(private route: ActivatedRoute, private categoriesService:CategoriesFilmService) { }
+  constructor(private route: ActivatedRoute, private titlesService:TitlesStreamService, private loginService:LoginService) { }
 
   ngOnInit(): void {
-   // this.user = getFromLocalStorage('currentUser') as IUser;
-    console.log(this.user)
     this.route.params.subscribe(param => {
       this.sectionTitle = param.category
-       this.titles = this.categoriesService.getSpecificCategoryFilm(param.category)
+       this.titles = this.titlesService.getSpecificCategoryFilm(param.category)
     })
     this.filterFilms('mostWatched');
     this.filterFilms('newEntry');
     this.filterFilms('recentlySeen');
+    this.filterFilms('favourite');
   }
 
   filterFilms ( filterType:string){
@@ -123,8 +121,9 @@ export class SubsectionCategoryComponent implements OnInit {
         })
       break;
       case 'favourite':
-        console.log(this.user)
-         this.subCategories[3].films = this.user.favouriteFilms;
+        const currUser = this.loginService.currentUser$.getValue();
+        console.log(currUser)
+          this.subCategories[3].films = currUser.favouriteFilms;
        break;
     }
 
@@ -146,7 +145,7 @@ export class SubsectionCategoryComponent implements OnInit {
        rndmDate.setDate(rndmDate.getDate() - dasottrarre)
       const dateoftoday = `${rndmDate.getFullYear()}/${rndmDate.getMonth() + 1}/${rndmDate.getDate()}`
       title.lastWatch = dateoftoday
-  }
+    }
   }
 
 

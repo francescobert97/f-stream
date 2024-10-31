@@ -1,4 +1,4 @@
-import { FilmCategories } from "src/app/modules/home/services/categories-film.service";
+import { FilmCategories } from "../services/titles-stream.service";
 import { ICategory } from "./category.model";
 import { IFilm } from "./film.model";
 const rndmNumber = (nmb:number, minValue:number=0) => Math.floor(Math.max(minValue, Math.random() * nmb));

@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
   template: `
       <div id="nav-category" class=" m-1 ">
 
-        <app-custom-button (callFnFromOutside)="test()" [customDataButton]="{label:'Seleziona la categoria >',classes: 'p-3', link:''}"></app-custom-button>
+        <app-custom-button (callFnFromOutside)="this.showList = !this.showList" [customDataButton]="{label:'Select category>',classes: 'p-3', link:''}"></app-custom-button>
 
-        <div  *appResize="{operation:'let', conditionMode:'reverse',classes:'gradient-bg'}"  class="category-list rounded p-1"  [class]="showList? 'visible-list' : 'hidden-list'">
+        <div  *appResize="{operation:'let', conditionMode:'reverse',classes:'gradient-bg', width:800}"  class="category-list rounded p-1"  [class]="showList? 'visible-list' : 'hidden-list'">
           <ng-container *ngFor="let category of categories">
             <app-custom-button (callFnFromOutside)="showList = !showList" [customDataButton]="{label:category.label,classes: 'p-3 categories-btn w-100 overflow-hidden', link:category.path}"></app-custom-button>
           </ng-container>
@@ -63,7 +63,7 @@ import { Router } from '@angular/router';
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       #nav-category {
           font-size:0.8em;
           padding: 0.9rem;
@@ -88,22 +88,17 @@ export class NavCategoryComponent implements OnInit {
 public showList:boolean = false;
 
 public categories = [
-  { path: '/home/comedy', label: 'Commedia' },
-  { path: '/home/dramatic', label: 'Drammatico' },
+  { path: '/home/comedy', label: 'Comedy' },
+  { path: '/home/dramatic', label: 'Dramatic' },
   { path: '/home/horror', label: 'Horror' },
-  { path: '/home/action', label: 'Azione' },
-  { path: '/home/sentimental', label: 'Sentimentale' },
+  { path: '/home/action', label: 'Action' },
+  { path: '/home/sentimental', label: 'Sentimental' },
   { path: '/home/thriller', label: 'Thriller' },
-  { path: '/home/animation', label: 'Animazione' },
-  { path: '/home/popular', label: 'Popolari' }
+  { path: '/home/animation', label: 'Animation' },
+  { path: '/home/popular', label: 'Popular' }
 ];
-  constructor( private route:Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-  }
-  test() {
-    console.log('triggerato')
-    this.showList = !this.showList
-    console.log(this.showList)
   }
 }

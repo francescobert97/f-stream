@@ -23,14 +23,18 @@ export class UserInteractionToolsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    const isAlreadyInTheList = this.user.favouriteFilms.find(movie => movie.id === this.movie.id? true : false);
+    if(isAlreadyInTheList) this.userTools.favourite = {label:'remove', isSwitched:true};
   }
   addLikeToMovie( operation: string) {
+
     if(operation === 'rating') this.userTools.rating.isSwitched?
       (this.movie.likes -= 1, this.userTools.rating.label = 'add', this.userTools.rating.isSwitched = false)
        :
       (this.movie.likes += 1,this.userTools.rating.label = 'remove' , this.userTools.rating.isSwitched = true);
 
-    else this.userTools.favourite.isSwitched?
+    else
+      this.userTools.favourite.isSwitched?
       (this.userTools.favourite = {label:'add', isSwitched:false}, this.setFavouriteFilms('delete'))
       :
        (this.userTools.favourite = {label:'remove', isSwitched:true},this.setFavouriteFilms('set'));

@@ -20,7 +20,7 @@ export class InformationComponent implements OnInit {
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.user =  getFromLocalStorage('currentUser') as IUser;
+    this.loginService.currentUser$.subscribe(user => this.user = user);
   }
 
 }

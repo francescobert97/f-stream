@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ObservableInput } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
 import { IFilm } from '../../../shared/models/film.model';
 import { TitlesStreamService } from '../../../shared/services/titles-stream.service';
 
@@ -48,7 +47,6 @@ import { TitlesStreamService } from '../../../shared/services/titles-stream.serv
   ]
 })
 export class SearchBarComponent implements OnInit {
-  @Input() titles:IFilm[] = []
   public searchTerm: String = ""
   constructor(private router:Router, private titlesStream: TitlesStreamService) { }
 

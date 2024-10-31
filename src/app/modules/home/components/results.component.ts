@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { IFilm } from 'src/app/shared/models/film.model';
 import { TitlesStreamService } from 'src/app/shared/services/titles-stream.service';
 
@@ -9,7 +8,7 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
   <div id="results" class="w-100 d-flex flex-column align-items-center p-5" >
     <div *ngIf="titlesSearch.length > 0; else noResults">
       <ng-container *ngFor="let title of titlesSearch">
-        <app-title-card [title]="title"></app-title-card>
+        <app-title-card [movie]="title"></app-title-card>
       </ng-container>
     </div>
 

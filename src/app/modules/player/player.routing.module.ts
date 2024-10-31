@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
    component: PlayerContainerComponent ,
     children: [
-      {path: ':movieId', component: PlayerContainerComponent },
+      {path: ':movieId', component: PlayerContainerComponent }
     ],
     canActivate: [AuthGuard,MovieGuard]
     },

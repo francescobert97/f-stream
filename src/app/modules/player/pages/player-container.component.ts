@@ -54,13 +54,16 @@ export class PlayerContainerComponent implements OnInit, OnDestroy {
   constructor(private route:ActivatedRoute, private titlesStream:TitlesStreamService, private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.filmSubs = this.route.queryParams.subscribe(<T extends Pick<IFilm, 'id' | 'genere'>>(param:Params) =>  this.movie = this.titlesStream.getFilm(param as T))
-    this.user = getFromLocalStorage('currentUser') as IUser
-    console.log(this.movie.id)
+    const currentFilm:IFilm = getFromLocalStorage('currentMovieWatched') as IFilm;
+
+    currentFilm? this.movie = currentFilm : this.filmSubs = this.route.queryParams.subscribe(<T extends Pick<IFilm, 'id' | 'genere'>>(param:Params) =>  this.movie = this.titlesStream.getFilm({id:Number(param.id), genere:param.genere} as T))
+    this.loginService.currentUser$.subscribe(user => this.user = user)
+
   }
 
   @HostListener('window:beforeunload', ['$event'])
   pushMovieUpdates() {
+    this.loginService.currentUser$.next(this.user)
     saveTolocalStorage('currentUser', this.user)
     this.titlesStream.updateFilm(this.movie)
   }
@@ -68,9 +71,10 @@ export class PlayerContainerComponent implements OnInit, OnDestroy {
     removeFromLocalStorage('currentMovieWatched')
   }
   ngOnDestroy(): void {
+    this.loginService.currentUser$.next(this.user)
     saveTolocalStorage('currentUser', this.user)
     this.titlesStream.updateFilm(this.movie)
     this.cleanLocalStorage()
-    this.filmSubs.unsubscribe()
+    this.filmSubs? this.filmSubs.unsubscribe() : null;
   }
 }
