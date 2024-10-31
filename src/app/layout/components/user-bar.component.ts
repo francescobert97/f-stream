@@ -29,7 +29,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
       min-width: 80px;
       img {
         height: 100%;
-        min-height:60px;
+        max-height:60px;
         width:100%;
         border-radius: 10px;
       }

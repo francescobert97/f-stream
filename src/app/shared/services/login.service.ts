@@ -21,11 +21,11 @@ export class LoginService {
   }
 
   userAuth2 (user:Pick<IUser, 'id' | 'username' | 'password'>):Observable<IUser>{
-    const guestUser = {id: 1, username:'guest', picture: '../../../assets/sasuke.jpeg', email: 'no-mail', subscriptionDate: 'not-given',  favouriteFilms: []}
+    const guestUser = {id: 1, username:'guest', picture: '../../../assets/icon/base_avatar.png', email: 'no-mail', subscriptionDate: 'not-given',  favouriteFilms: []}
     return user.id?
      this.httpClient.get<IUser[]>('http://localhost:3000/user').pipe(
       tap(users => {
-        const userLogged = {id: user.id, username:user.username, password:user.password, picture: '../../../assets/sasuke.jpeg', email: 'admin-test@gmail.com', subscriptionDate: '2022/04/10', favouriteFilms: []}
+        const userLogged = {id: user.id, username:user.username, password:user.password, picture: '../../../assets/icon/base_avatar.png', email: 'admin-test@gmail.com', subscriptionDate: '2022/04/10', favouriteFilms: []}
         saveTolocalStorage('currentUser',  JSON.stringify(userLogged))
         this.currentUser$.next(userLogged)
       })

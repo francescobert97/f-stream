@@ -15,8 +15,8 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: [
     `
-         #content-landing {
-      background: url("../../../../assets/images/landing-img.jpg") center;
+     #content-landing {
+      background: url("../../../../assets/images/landing-img.webp") center;
       background:cover;
 
       .text-style {
@@ -29,7 +29,8 @@ import { Component, OnInit } from '@angular/core';
 
     @media(max-width: 600px) {
       #content-landing {
-        font-size: 0.6em;
+        background-size: 186%;
+        font-size: 0.8em;
       .text-style {
 
         h1 {

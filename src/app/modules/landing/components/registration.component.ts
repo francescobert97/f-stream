@@ -35,7 +35,8 @@ import { LoginService } from 'src/app/shared/services/login.service';
     `
     #form-registration {
 
-        background: url('../../../../assets/images/registrationbg.jpg');
+        background: url('../../../../assets/images/registrationbg.webp') no-repeat;
+        background-size: cover;
         border-radius: 10px;
         h2 {
           text-shadow: var(--text-shadow);
