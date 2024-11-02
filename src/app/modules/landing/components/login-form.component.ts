@@ -6,7 +6,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
 @Component({
   selector: 'app-login-form',
   template: `
- <div id="form-login" class="text-light d-flex justify-content-start mt-4 p-4 ">
+ <div id="form-login" class="text-light d-flex justify-content-start mt-4 p-4">
       <form class="d-flex flex-column" [formGroup]="profileForm">
         <label for="first-name"> Username: </label>
         <input class="text-light" id="first-name" type="text" formControlName="username">

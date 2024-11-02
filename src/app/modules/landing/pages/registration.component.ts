@@ -9,7 +9,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
   <div id="form-registration" class="p-4 row ">
   <app-custom-button [customDataButton]="{label:'Back to Login', link:'/login'}"></app-custom-button>
 
-        <h2 class="col-sm-4 ">Tutto quello che non ti aspettavi di trovare</h2>
+        <h2 class="col-sm-4 mt-2">Tutto quello che non ti aspettavi di trovare</h2>
       <form class="col-12 col-sm-3 offset-sm-4 d-flex flex-column align-items-center gradient-bg  p-3 mt-2" [formGroup]="registrationForm">
         <label for="username"> Username: </label>
         <input class="text-dark" id="username" type="text" formControlName="username">
@@ -34,7 +34,8 @@ import { LoginService } from 'src/app/shared/services/login.service';
   styles: [
     `
     #form-registration {
-
+        width:100%;
+        height: 100%;
         background: url('../../../../assets/images/registrationbg.webp') no-repeat;
         background-size: cover;
         border-radius: 10px;

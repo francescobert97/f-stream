@@ -14,14 +14,14 @@ import { Router } from '@angular/router';
   `,
   styles: [
     `
+
     #intro-animation {
       position: absolute;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      overflow-y: hidden;
-      overflow-x: hidden;
+      overflow: hidden;
     }
 
 

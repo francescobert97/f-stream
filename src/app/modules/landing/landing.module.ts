@@ -6,8 +6,8 @@ import { LandingComponent } from './pages/landing.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LandingIntroComponent } from './components/landing-intro.component';
 import { UikitModule } from 'src/app/shared/uikit/uikit.module';
-import { RegistrationComponent } from './components/registration.component';
-import { LoginFormComponent } from './pages/login-form.component';
+import { RegistrationComponent } from './pages/registration.component';
+import { LoginFormComponent } from './components/login-form.component';
 import { LoginComponent } from './pages/login.component';
 
 

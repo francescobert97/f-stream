@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './pages/landing.component';
-import { RegistrationComponent } from './components/registration.component';
+import { RegistrationComponent } from './pages/registration.component';
 import { LoginComponent } from './pages/login.component';
 
 

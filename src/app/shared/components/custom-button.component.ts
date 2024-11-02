@@ -58,8 +58,9 @@ export interface ICustomDataButton<T = unknown> {
     }
 
     .play-btn {
-      top:40%;
-      left:45%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   `]
 })

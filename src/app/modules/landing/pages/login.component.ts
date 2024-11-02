@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-login',
   template: `
-  <div id="content-landing" class="col-11 offset-sm-3 col-sm-6 mx-auto p-5 d-flex align-items-center justify-content-center flex-column mt-5 active-link">
+  <div id="content-landing" class="col-12 offset-sm-3 col-sm-6 mx-auto p-5 d-flex align-items-center justify-content-center flex-column mt-5 active-link">
     <div class="text-style col-sm-6">
       <h1>Il migliore sito di streaming sul mercato</h1>
       <p>Film, Serie TV, documentari e tanto altro.</p>
@@ -16,6 +16,8 @@ import { Component, OnInit } from '@angular/core';
   styles: [
     `
      #content-landing {
+      width:100%;
+      height: 100%;
       background: url("../../../../assets/images/landing-img.webp") center;
       background:cover;
 
@@ -29,7 +31,7 @@ import { Component, OnInit } from '@angular/core';
 
     @media(max-width: 600px) {
       #content-landing {
-        background-size: 186%;
+        background-size: 208%;
         font-size: 0.8em;
       .text-style {
 

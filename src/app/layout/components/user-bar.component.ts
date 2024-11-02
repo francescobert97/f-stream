@@ -14,7 +14,7 @@ import { LoginService } from 'src/app/shared/services/login.service';
         <p *appResize="{operation:'createView', conditionMode:'reverse'}" class="mx-4">{{user.username}}</p>
 
         <p>email:{{user.email}}</p>
-        <a href="javascript:void(0)" class="text-light" routerLink=""  (mouseover)="triggerTooltip()">Vedi le informazioni complete</a>
+        <a href="javascript:void(0)" class="text-light" routerLink="/none"  (mouseover)="triggerTooltip()">Vedi le informazioni complete</a>
         <app-custom-button (callFnFromOutside)="logoutUser()" [customDataButton]="{label: 'Logout',classes: '',link:'/'}"></app-custom-button>
   </div>
 

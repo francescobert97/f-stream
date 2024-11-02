@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="container-fluid d-flex flex-column vh-100">
+  <div class="container-fluid d-flex flex-column vh-100 no-scroll">
       <app-navbar></app-navbar>
-      <div class="text-light content overflow-scroll scrollbar-none">
+      <div class="text-light content">
         <router-outlet></router-outlet>
       </div>
         <app-footer></app-footer>
@@ -13,14 +13,14 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: [
     `
+
     .content {
-      flex-grow:1;
+      //flex-grow:1;
       width:100%;
       height: 100%;
       overflow-y: scroll;
       scrollbar-width:none;
-      overflow-x: none;
-
+      overflow-x: hidden;
     }
     `
   ]

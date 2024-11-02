@@ -125,7 +125,6 @@ export class SubsectionCategoryComponent implements OnInit {
       break;
       case 'favourite':
         const currUser = this.loginService.currentUser$.getValue();
-        console.log(currUser)
           this.subCategories[3].films = currUser.favouriteFilms;
        break;
     }

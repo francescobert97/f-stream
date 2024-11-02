@@ -8,7 +8,7 @@ import { exhaustMap, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-navbar',
   template: `
-  <div class="row p-2 text-light">
+  <div class="row p-2 text-light ">
     <div class="col-sm-3 col-8">
       <app-logo></app-logo>
     </div>
@@ -27,7 +27,7 @@ import { exhaustMap, tap } from 'rxjs/operators';
     </div>
 
     <div class="h-100 col-sm-1 col-md-1  col-1 mx-auto">
-      <app-user-bar [user]="user" (showTooltip)="isTooltipVisible = !isTooltipVisible"></app-user-bar>
+      <app-user-bar [user]="user" (showTooltip)="isTooltipVisible = true"></app-user-bar>
     </div>
   </div>
 
@@ -54,7 +54,7 @@ import { exhaustMap, tap } from 'rxjs/operators';
       .active {
         display:flex!important;
         position:absolute;
-        top:5.8rem;
+        top:5.5rem;
         left: 0;
       }
 
@@ -93,7 +93,7 @@ export class NavbarComponent implements OnInit {
   userMenu:boolean = false;
   isActive:boolean = false;
   isTooltipVisible:boolean = false;
-  newSubscription:Subscription = new Subscription()
+  newSubscription!:Subscription
   constructor(private loginService: LoginService, private router:Router) { }
 
   ngOnInit(): void {
@@ -101,8 +101,9 @@ export class NavbarComponent implements OnInit {
   }
 
   showTooltip (){
-  this.newSubscription.unsubscribe()
-  const obs$ =  of(true).pipe(
+    if(this.newSubscription)   this.newSubscription.unsubscribe();
+
+      const obs$ =  of(true).pipe(
     tap(data => this.isTooltipVisible = true),
       exhaustMap(() => timer(3000)),
       tap(data => this.isTooltipVisible = false)
