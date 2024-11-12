@@ -5,8 +5,8 @@ import { TitlesStreamService } from '../../../shared/services/titles-stream.serv
 @Component({
   selector: 'app-search-bar',
   template: `
-    <div id="search-bar" class=" text-light ">
-      <input class="text-light me-3 bg-none" (change)="search()" [(ngModel)]="searchTerm" type="search" placeholder="Cerca film da guardare">
+    <div id="search-bar" class="d-flex text-light ">
+      <input class="text-light  bg-none" (change)="search()" [(ngModel)]="searchTerm" type="search" placeholder="Cerca film da guardare">
       <button (click)="search()" type="button" class="text-light bg-none">Cerca</button>
     </div>
   `,
@@ -35,10 +35,9 @@ import { TitlesStreamService } from '../../../shared/services/titles-stream.serv
 
     @media (max-width: 600px) {
       #search-bar {
-        padding: 8px 1.5rem;
-        max-width: 240px;
+        padding: 0.5rem 0.6rem;
         button {
-          font-size:1.5em;
+          font-size:1.3em;
         }
       }
     }

@@ -18,8 +18,8 @@ import { exhaustMap, tap } from 'rxjs/operators';
 
     <div class="col-sm-7 col-12  mx-auto navbar-links" [ngClass]="{'active gradient-bg':isActive}">
       <a class="mx-3" href="javascript:void(0)" routerLink="/home/comedy"  routerLinkActive="active-link">Home</a>
-      <a #ref class="mx-3" href="javascript:void(0)" routerLink="/area/blocked"  routerLinkActive="active-link" (mouseover)="showTooltip()">Area Personale</a>
-      <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">Notizie</a>
+      <a #ref class="mx-3" href="javascript:void(0)" routerLink="/area/blocked"  routerLinkActive="active-link" (mouseover)="showTooltip()">Personal Area</a>
+      <a class="mx-3" href="javascript:void(0)" routerLink="/notizie"  routerLinkActive="active-link">News</a>
     </div>
 
     <div *ngIf="isTooltipVisible" class="position-absolute z-index-moreover top-sm-50 bottom-0 mb-5">

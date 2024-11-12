@@ -8,8 +8,8 @@ import { TitlesStreamService } from 'src/app/shared/services/titles-stream.servi
   selector: 'app-subsection-category',
   template: `
 <div id="section-category" class="">
-  <div class="d-flex justify-content-between mt-2 gap-3">
-    <p class="text-center ms-4  active-link">{{sectionTitle}}</p>
+  <div class="d-flex justify-content-between mt-2">
+    <p class="text-center ms-4 active-link">{{sectionTitle}}</p>
     <app-search-bar></app-search-bar>
   </div>
 
