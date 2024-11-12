@@ -36,7 +36,7 @@ import { TitlesStreamService } from '../../../shared/services/titles-stream.serv
     @media (max-width: 600px) {
       #search-bar {
         padding: 8px 1.5rem;
-        max-width: 225px;
+        max-width: 240px;
         button {
           font-size:1.5em;
         }

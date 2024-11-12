@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { IUser } from 'src/app/shared/models/user.model';
 import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-area',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
   <div  class="area mt-3">
     <div class="d-flex justify-content-around">

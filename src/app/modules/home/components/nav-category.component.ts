@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   template: `
       <div id="nav-category" class=" m-1 ">
 
-        <app-custom-button (callFnFromOutside)="this.showList = !this.showList" [customDataButton]="{label:'Select category>',classes: 'p-3', link:''}"></app-custom-button>
+        <app-custom-button (callFnFromOutside)="this.showList = !this.showList" [customDataButton]="{label:'Select category',classes: 'p-3', link:''}"></app-custom-button>
 
         <div  *appResize="{operation:'let', conditionMode:'reverse',classes:'gradient-bg', width:800}"  class="category-list rounded p-1"  [class]="showList? 'visible-list' : 'hidden-list'">
           <ng-container *ngFor="let category of categories">
